@@ -299,7 +299,7 @@ struct OBSStudioAPI : obs_frontend_callbacks {
 
 	void *obs_frontend_add_tools_menu_qaction(const char *name) override
 	{
-		main->ui->menuTools->setEnabled(true);
+		main->ui->menuTools->setEnabled(false);
 		return (void *)main->ui->menuTools->addAction(QT_UTF8(name));
 	}
 
@@ -307,14 +307,14 @@ struct OBSStudioAPI : obs_frontend_callbacks {
 					      obs_frontend_cb callback,
 					      void *private_data) override
 	{
-		main->ui->menuTools->setEnabled(true);
+		main->ui->menuTools->setEnabled(false);
 
 		auto func = [private_data, callback]() {
 			callback(private_data);
 		};
 
-		QAction *action = main->ui->menuTools->addAction(QT_UTF8(name));
-		QObject::connect(action, &QAction::triggered, func);
+		//QAction *action = main->ui->menuTools->addAction(QT_UTF8(name));
+		//QObject::connect(action, &QAction::triggered, func);
 	}
 
 	void *obs_frontend_add_dock(void *dock) override

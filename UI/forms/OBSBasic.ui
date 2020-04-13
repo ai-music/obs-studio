@@ -28,7 +28,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="obs.qrc">
-    <normaloff>:/res/images/obs.png</normaloff>:/res/images/obs.png</iconset>
+    <normaloff>:/res/images/aimusic.png</normaloff>:/res/images/aimusic.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -188,7 +188,7 @@
      <x>0</x>
      <y>0</y>
      <width>1079</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -210,30 +210,8 @@
     <property name="title">
      <string>Basic.MainMenu.Help</string>
     </property>
-    <widget class="QMenu" name="menuLogFiles">
-     <property name="title">
-      <string>Basic.MainMenu.Help.Logs</string>
-     </property>
-     <addaction name="actionShowLogs"/>
-     <addaction name="actionUploadCurrentLog"/>
-     <addaction name="actionUploadLastLog"/>
-     <addaction name="actionViewCurrentLog"/>
-    </widget>
-    <widget class="QMenu" name="menuCrashLogs">
-     <property name="title">
-      <string>Basic.MainMenu.Help.CrashLogs</string>
-     </property>
-     <addaction name="actionShowCrashLogs"/>
-     <addaction name="actionUploadLastCrashLog"/>
-    </widget>
-    <addaction name="actionHelpPortal"/>
-    <addaction name="actionWebsite"/>
-    <addaction name="actionDiscord"/>
     <addaction name="separator"/>
-    <addaction name="menuLogFiles"/>
-    <addaction name="menuCrashLogs"/>
     <addaction name="separator"/>
-    <addaction name="actionCheckForUpdates"/>
     <addaction name="actionShowAbout"/>
     <addaction name="separator"/>
    </widget>
@@ -334,6 +312,9 @@
     <addaction name="actionAdvAudioProperties"/>
    </widget>
    <widget class="QMenu" name="profileMenu">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="title">
      <string>Basic.MainMenu.Profile</string>
     </property>
@@ -399,6 +380,9 @@
     <addaction name="stats"/>
    </widget>
    <widget class="QMenu" name="menuTools">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="title">
      <string>Basic.MainMenu.Tools</string>
     </property>
@@ -738,7 +722,7 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>71</width>
+           <width>91</width>
            <height>16</height>
           </rect>
          </property>
@@ -792,7 +776,7 @@
            <x>0</x>
            <y>0</y>
            <width>16</width>
-           <height>28</height>
+           <height>16</height>
           </rect>
          </property>
          <property name="sizePolicy">
@@ -1570,6 +1554,9 @@
    </property>
   </action>
   <action name="actionNewProfile">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>New</string>
    </property>
@@ -1682,6 +1669,9 @@
    </property>
   </action>
   <action name="autoConfigure">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Basic.AutoConfig</string>
    </property>
@@ -1765,6 +1755,9 @@
   <action name="actionHelpPortal">
    <property name="text">
     <string>Basic.MainMenu.Help.HelpPortal</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
    </property>
   </action>
   <action name="actionShowCrashLogs">

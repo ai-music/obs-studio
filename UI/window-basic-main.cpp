@@ -406,6 +406,9 @@ OBSBasic::OBSBasic(QWidget *parent)
 		this,
 		SLOT(ScenesReordered(const QModelIndex &, int, int,
 				     const QModelIndex &, int)));
+
+	ui->menuTools->setEnabled(false);
+	ui->menuTools->setVisible(false);
 }
 
 static void SaveAudioDevice(const char *name, int channel, obs_data_t *parent,
@@ -5032,7 +5035,7 @@ void OBSBasic::UploadLog(const char *subdir, const char *file)
 	if (!*fileString)
 		return;
 
-	ui->menuLogFiles->setEnabled(false);
+	//ui->menuLogFiles->setEnabled(false);
 
 	stringstream ss;
 	ss << "OBS " << App()->GetVersionString() << " log file uploaded at "
@@ -5111,7 +5114,7 @@ void OBSBasic::on_actionCheckForUpdates_triggered()
 
 void OBSBasic::logUploadFinished(const QString &text, const QString &error)
 {
-	ui->menuLogFiles->setEnabled(true);
+	//ui->menuLogFiles->setEnabled(true);
 
 	if (text.isEmpty()) {
 		OBSMessageBox::critical(
@@ -5284,6 +5287,7 @@ static inline void ClearProcessPriority()
 
 inline void OBSBasic::OnActivate()
 {
+	ui->profileMenu->setEnabled(false);
 	if (ui->profileMenu->isEnabled()) {
 		ui->profileMenu->setEnabled(false);
 		ui->autoConfigure->setEnabled(false);
@@ -5302,8 +5306,9 @@ extern volatile bool replaybuf_active;
 
 inline void OBSBasic::OnDeactivate()
 {
+	ui->profileMenu->setEnabled(false);
 	if (!outputHandler->Active() && !ui->profileMenu->isEnabled()) {
-		ui->profileMenu->setEnabled(true);
+		setEnabled(false);
 		ui->autoConfigure->setEnabled(true);
 		App()->DecrementSleepInhibition();
 		ClearProcessPriority();
@@ -6848,7 +6853,7 @@ void OBSBasic::UpdateTitleBar()
 	const char *sceneCollection = config_get_string(
 		App()->GlobalConfig(), "Basic", "SceneCollection");
 
-	name << "OBS ";
+	name << "Ossia Live ";
 	if (previewProgramMode)
 		name << "Studio ";
 
@@ -6856,7 +6861,7 @@ void OBSBasic::UpdateTitleBar()
 	if (App()->IsPortableMode())
 		name << " - Portable Mode";
 
-	name << " - " << Str("TitleBar.Profile") << ": " << profile;
+	//name << " - " << Str("TitleBar.Profile") << ": " << profile;
 	name << " - " << Str("TitleBar.Scenes") << ": " << sceneCollection;
 
 	setWindowTitle(QT_UTF8(name.str().c_str()));

@@ -1,0 +1,21 @@
+diff a/UI/window-basic-main.cpp b/UI/window-basic-main.cpp	(rejected hunks)
+@@ -5286,12 +5286,14 @@
+ {
+ 	//if (ui->profileMenu->isEnabled()) {
+ 	//	ui->profileMenu->setEnabled(false);
++	//	ui->autoConfigure->setEnabled(false);
++	//	App()->IncrementSleepInhibition();
++	//	UpdateProcessPriority();
+ 
+-		if (trayIcon)
+-			trayIcon->setIcon(QIcon::fromTheme(
+-				"obs-tray-active",
+-				QIcon(":/res/images/tray_active.png")));
+-	}
++	//	if (trayIcon)
++	//		trayIcon->setIcon(QIcon::fromTheme(
++	//			"obs-tray-active",
++	//			QIcon(":/res/images/tray_active.png")));
+ 	//}
+ }
+ 

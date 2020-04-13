@@ -61,7 +61,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>:res/images/obs.png</pixmap>
+        <pixmap>:res/images/aimusic.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -76,7 +76,7 @@
        <item>
         <widget class="QLabel" name="name">
          <property name="text">
-          <string notr="true">OBS Studio</string>
+          <string notr="true">Ossia Live</string>
          </property>
         </widget>
        </item>
@@ -84,40 +84,6 @@
         <widget class="QLabel" name="version">
          <property name="text">
           <string notr="true">Version</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="info">
-         <property name="text">
-          <string>About.Info</string>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="contribute">
-         <property name="text">
-          <string notr="true">Contribute</string>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="donate">
-         <property name="text">
-          <string notr="true">Donate</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="getInvolved">
-         <property name="text">
-          <string notr="true">Get Involved</string>
          </property>
         </widget>
        </item>
@@ -136,13 +102,6 @@
           </size>
          </property>
         </spacer>
-       </item>
-       <item>
-        <widget class="QTextBrowser" name="textBrowser">
-         <property name="openExternalLinks">
-          <bool>true</bool>
-         </property>
-        </widget>
        </item>
       </layout>
      </item>
@@ -173,27 +132,10 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="ClickableLabel" name="about">
-        <property name="text">
-         <string>About</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="ClickableLabel" name="authors">
-        <property name="text">
-         <string>Authors</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="ClickableLabel" name="license">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string>License</string>
         </property>
