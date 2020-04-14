@@ -72,6 +72,7 @@
 
 #include <QScreen>
 #include <QWindow>
+//#include <QtWebView>
 
 #include <json11.hpp>
 
@@ -340,7 +341,7 @@ OBSBasic::OBSBasic(QWidget *parent)
 	assignDockToggle(ui->scenesDock, ui->toggleScenes);
 	assignDockToggle(ui->sourcesDock, ui->toggleSources);
 	assignDockToggle(ui->mixerDock, ui->toggleMixer);
-	assignDockToggle(ui->transitionsDock, ui->toggleTransitions);
+	//assignDockToggle(ui->transitionsDock, ui->toggleTransitions);
 	assignDockToggle(ui->controlsDock, ui->toggleControls);
 	assignDockToggle(statsDock, ui->toggleStats);
 
@@ -409,6 +410,9 @@ OBSBasic::OBSBasic(QWidget *parent)
 
 	ui->menuTools->setEnabled(false);
 	ui->menuTools->setVisible(false);
+	ui->toggleTransitions->setVisible(false);
+	ui->toggleTransitions->setVisible(false);
+	//ui->transitionDock->setVisible(false);
 }
 
 static void SaveAudioDevice(const char *name, int channel, obs_data_t *parent,
@@ -6935,7 +6939,7 @@ void OBSBasic::on_resetUI_triggered()
 	int mixerSize = cx - (cx22_5 * 2 + cx5 * 2);
 
 	QList<QDockWidget *> docks{ui->scenesDock, ui->sourcesDock,
-				   ui->mixerDock, ui->transitionsDock,
+				   ui->mixerDock,
 				   ui->controlsDock};
 
 	QList<int> sizes{cx22_5, cx22_5, mixerSize, cx5, cx5};
@@ -6943,7 +6947,8 @@ void OBSBasic::on_resetUI_triggered()
 	ui->scenesDock->setVisible(true);
 	ui->sourcesDock->setVisible(true);
 	ui->mixerDock->setVisible(true);
-	ui->transitionsDock->setVisible(true);
+	ui->transitionsDock->setVisible(false);
+	//ui->musicControlDock->setVisible(true);
 	ui->controlsDock->setVisible(true);
 	statsDock->setVisible(false);
 	statsDock->setFloating(true);
@@ -6965,7 +6970,7 @@ void OBSBasic::on_lockUI_toggled(bool lock)
 	ui->scenesDock->setFeatures(mainFeatures);
 	ui->sourcesDock->setFeatures(mainFeatures);
 	ui->mixerDock->setFeatures(mainFeatures);
-	ui->transitionsDock->setFeatures(mainFeatures);
+	//ui->transitionsDock->setFeatures(mainFeatures);
 	ui->controlsDock->setFeatures(mainFeatures);
 	statsDock->setFeatures(features);
 

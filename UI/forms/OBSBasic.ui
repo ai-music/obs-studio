@@ -23,6 +23,11 @@
     <height>0</height>
    </size>
   </property>
+  <property name="font">
+   <font>
+    <family>MS Shell Dlg 2</family>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>.MainWindow</string>
   </property>
@@ -722,7 +727,7 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>91</width>
+           <width>90</width>
            <height>16</height>
           </rect>
          </property>
@@ -1194,6 +1199,78 @@
         </size>
        </property>
       </spacer>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="musicControlsWidget">
+   <property name="windowTitle">
+    <string>Music Controls</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="musicControlsWidgetContents">
+    <layout class="QHBoxLayout" name="horizontalLayout_9">
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_8">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_10">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_11">
+           <item>
+            <widget class="QRadioButton" name="radioButton">
+             <property name="text">
+              <string>High Energy</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioButton_4">
+             <property name="text">
+              <string>Medium Energy</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioButton_2">
+             <property name="text">
+              <string>Tranquil</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioButton_3">
+             <property name="text">
+              <string>Chilled</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QPushButton" name="playMusicButton">
+           <property name="text">
+            <string>Play Music</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
      </item>
     </layout>
    </widget>
@@ -1735,7 +1812,10 @@
     <bool>true</bool>
    </property>
    <property name="checked">
-    <bool>true</bool>
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>Basic.SceneTransitions</string>

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>840</width>
-    <height>519</height>
+    <height>338</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -137,7 +137,7 @@
          <bool>false</bool>
         </property>
         <property name="text">
-         <string>License</string>
+         <string/>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>

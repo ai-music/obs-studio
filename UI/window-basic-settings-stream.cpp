@@ -148,6 +148,8 @@ void OBSBasicSettings::LoadStream1Settings()
 	bool streamActive = obs_frontend_streaming_active();
 	ui->streamPage->setEnabled(!streamActive);
 
+	ui->streamPage->setEnabled(false);
+
 	loading = false;
 }
 
