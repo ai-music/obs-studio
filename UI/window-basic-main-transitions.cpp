@@ -1463,6 +1463,7 @@ void OBSBasic::ResizeProgram(uint32_t cx, uint32_t cy)
 {
 	QSize targetSize;
 
+
 	/* resize program panel to fix to the top section of the window */
 	targetSize = GetPixelSize(program);
 	GetScaleAndCenterPos(int(cx), int(cy),
