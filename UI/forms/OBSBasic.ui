@@ -41,6 +41,15 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
+       <widget class="QWebEngineView" name="webViewGenre">
+        <property name="url">
+         <url>
+          <string>about:blank</string>
+         </url>
+        </property>
+       </widget>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="previewLayout">
         <property name="spacing">
          <number>2</number>
@@ -188,7 +197,7 @@
      <x>0</x>
      <y>0</y>
      <width>1079</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -738,7 +747,7 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>71</width>
+           <width>90</width>
            <height>16</height>
           </rect>
          </property>
@@ -1811,6 +1820,11 @@
   </action>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>QWebEngineView</class>
+   <extends>QWidget</extends>
+   <header location="global">QtWebEngineWidgets/QWebEngineView</header>
+  </customwidget>
   <customwidget>
    <class>OBSBasicPreview</class>
    <extends>QWidget</extends>
