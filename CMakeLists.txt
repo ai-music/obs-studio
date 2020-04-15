@@ -220,6 +220,7 @@ if(NOT INSTALLER_RUN)
 		endif()
 
 		find_package(Qt5Widgets ${FIND_MODE})
+		find_package(Qt5WebEngineWidgets)
 	endif()
 
 	add_subdirectory(deps)
