@@ -387,11 +387,16 @@ if(WIN32)
 			OUTPUT_NAME "obs${_output_suffix}")
 endif()
 
+# See https://doc.qt.io/qt-5/qtwebengine-deploying.html
+# We should just need WebEngineWidgets and WebEngineCore
 target_link_libraries(obs
 	libobs
 	Qt5::Widgets
 	Qt5::Svg
 	Qt5::Xml
+	Qt5::WebEngineCore
+	#Qt5::WebEngine
+	#Qt5::WebChannel
 	Qt5::WebEngineWidgets
 	obs-frontend-api
 	${FFMPEG_LIBRARIES}

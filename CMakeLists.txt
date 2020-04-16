@@ -220,7 +220,14 @@ if(NOT INSTALLER_RUN)
 		endif()
 
 		find_package(Qt5Widgets ${FIND_MODE})
+
+		# See https://doc.qt.io/qt-5/qtwebengine-deploying.html
+		# We should just need WebEngineWidgets and WebEngineCore
+		find_package(Qt5WebEngineCore)
+		#find_package(Qt5WebEngine)
+		#find_package(Qt5WebChannel)
 		find_package(Qt5WebEngineWidgets)
+
 	endif()
 
 	add_subdirectory(deps)

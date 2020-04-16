@@ -154,13 +154,28 @@ if (NOT ZLIB_BIN_FILES)
 endif()
 
 file(GLOB QT_DEBUG_BIN_FILES
+	"${Qt5Core_DIR}/../../../bin/Qt5Networkd.dll"
+	"${Qt5Core_DIR}/../../../bin/Qt5Positioningd.dll"
+	"${Qt5Core_DIR}/../../../bin/Qt5PrintSupportd.dll"
+	"${Qt5Core_DIR}/../../../bin/Qt5Qmld.dll"
+	"${Qt5Core_DIR}/../../../bin/QtQmlModelsd.dll"
+	"${Qt5Core_DIR}/../../../bin/Qt5Quickd.dll"
+	"${Qt5Core_DIR}/../../../bin/Qt5QuickWidgetsd.dll"
+	"${Qt5Core_DIR}/../../../bin/Qt5SerialPortd.dll"
+	"${Qt5Core_DIR}/../../../bin/Qt5WebChanneld.dll"
+	"${Qt5Core_DIR}/../../../bin/Qt5WebEngineCored.dll"
+	"${Qt5Core_DIR}/../../../bin/Qt5WebEngineWidgetsd.dll"
+	"${Qt5Core_DIR}/../../../bin/Qt5WebEngineProcessd.exe"
+
 	"${Qt5Core_DIR}/../../../bin/Qt5Cored.dll"
 	"${Qt5Core_DIR}/../../../bin/Qt5Guid.dll"
 	"${Qt5Core_DIR}/../../../bin/Qt5Widgetsd.dll"
 	"${Qt5Core_DIR}/../../../bin/Qt5Svgd.dll"
 	"${Qt5Core_DIR}/../../../bin/Qt5Xmld.dll"
 	"${Qt5Core_DIR}/../../../bin/libGLESv2d.dll"
-	"${Qt5Core_DIR}/../../../bin/libEGLd.dll")
+	"${Qt5Core_DIR}/../../../bin/libEGLd.dll"
+
+	)
 file(GLOB QT_DEBUG_PLAT_BIN_FILES
 	"${Qt5Core_DIR}/../../../plugins/platforms/qwindowsd.dll")
 file(GLOB QT_DEBUG_STYLES_BIN_FILES
@@ -178,7 +193,20 @@ file(GLOB QT_BIN_FILES
 	"${Qt5Core_DIR}/../../../bin/Qt5Svg.dll"
 	"${Qt5Core_DIR}/../../../bin/Qt5Xml.dll"
 	"${Qt5Core_DIR}/../../../bin/libGLESv2.dll"
-	"${Qt5Core_DIR}/../../../bin/libEGL.dll")
+	"${Qt5Core_DIR}/../../../bin/libEGL.dll"
+	"${Qt5Core_DIR}/../../../bin/Qt5Network.dll"
+	"${Qt5Core_DIR}/../../../bin/Qt5Positioning.dll"
+	"${Qt5Core_DIR}/../../../bin/Qt5PrintSupport.dll"
+	"${Qt5Core_DIR}/../../../bin/Qt5Qml.dll"
+	"${Qt5Core_DIR}/../../../bin/QtQmlModels.dll"
+	"${Qt5Core_DIR}/../../../bin/Qt5Quick.dll"
+	"${Qt5Core_DIR}/../../../bin/Qt5QuickWidgets.dll"
+	"${Qt5Core_DIR}/../../../bin/Qt5SerialPort.dll"
+	"${Qt5Core_DIR}/../../../bin/Qt5WebChannel.dll"
+	"${Qt5Core_DIR}/../../../bin/Qt5WebEngineCore.dll"
+	"${Qt5Core_DIR}/../../../bin/Qt5WebEngineWidgets.dll"
+	"${Qt5Core_DIR}/../../../bin/Qt5WebEngineProcess.exe"
+	)
 file(GLOB QT_PLAT_BIN_FILES
 	"${Qt5Core_DIR}/../../../plugins/platforms/qwindows.dll")
 file(GLOB QT_STYLES_BIN_FILES
