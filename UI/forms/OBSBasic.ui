@@ -41,6 +41,71 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
+       <layout class="QVBoxLayout" name="verticalLayout_10">
+        <item>
+         <widget class="QPushButton" name="btnGenre2">
+          <property name="text">
+           <string>New</string>
+          </property>
+          <property name="icon">
+           <iconset theme=":/res/images/new.png"/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>64</width>
+            <height>64</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnGenre1">
+          <property name="text">
+           <string>Mindful</string>
+          </property>
+          <property name="icon">
+           <iconset theme=":/res/images/mindful.png"/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>64</width>
+            <height>64</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnGenre3">
+          <property name="text">
+           <string>Hero</string>
+          </property>
+          <property name="icon">
+           <iconset theme=":/res/images/hero.png"/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>64</width>
+            <height>64</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="previewLayout">
         <property name="spacing">
          <number>2</number>
@@ -188,7 +253,7 @@
      <x>0</x>
      <y>0</y>
      <width>1079</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -738,7 +803,7 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>71</width>
+           <width>90</width>
            <height>16</height>
           </rect>
          </property>
@@ -792,7 +857,7 @@
            <x>0</x>
            <y>0</y>
            <width>16</width>
-           <height>28</height>
+           <height>16</height>
           </rect>
          </property>
          <property name="sizePolicy">
