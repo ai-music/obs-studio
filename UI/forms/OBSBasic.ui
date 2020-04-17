@@ -8,7 +8,7 @@
     <x>0</x>
     <y>0</y>
     <width>1079</width>
-    <height>730</height>
+    <height>943</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -41,57 +41,108 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_10">
-        <item>
+       <layout class="QVBoxLayout" name="verticalLayout_10"/>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="1" column="1">
+         <widget class="QPushButton" name="btnGenre5">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme=":/res/images/5.png"/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>200</width>
+            <height>200</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
          <widget class="QPushButton" name="btnGenre2">
           <property name="text">
-           <string>New</string>
+           <string/>
           </property>
           <property name="icon">
-           <iconset theme=":/res/images/new.png"/>
+           <iconset theme=":/res/images/2.png"/>
           </property>
           <property name="iconSize">
            <size>
-            <width>64</width>
-            <height>64</height>
+            <width>200</width>
+            <height>200</height>
            </size>
           </property>
          </widget>
         </item>
-        <item>
+        <item row="0" column="0">
          <widget class="QPushButton" name="btnGenre1">
           <property name="text">
-           <string>Mindful</string>
+           <string/>
           </property>
           <property name="icon">
-           <iconset theme=":/res/images/mindful.png"/>
+           <iconset theme=":/res/images/1.png"/>
           </property>
           <property name="iconSize">
            <size>
-            <width>64</width>
-            <height>64</height>
+            <width>200</width>
+            <height>200</height>
            </size>
           </property>
          </widget>
         </item>
-        <item>
+        <item row="2" column="1">
+         <widget class="QPushButton" name="btnGenre6">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme=":/res/images/6.png"/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>200</width>
+            <height>200</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="btnGenre4">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme=":/res/images/4.png"/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>200</width>
+            <height>200</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
          <widget class="QPushButton" name="btnGenre3">
           <property name="text">
-           <string>Hero</string>
+           <string/>
           </property>
           <property name="icon">
-           <iconset theme=":/res/images/hero.png"/>
+           <iconset theme=":/res/images/3.png"/>
           </property>
           <property name="iconSize">
            <size>
-            <width>64</width>
-            <height>64</height>
+            <width>200</width>
+            <height>200</height>
            </size>
           </property>
          </widget>
         </item>
-        <item>
-         <spacer name="verticalSpacer_5">
+        <item row="3" column="1">
+         <spacer name="verticalSpacer_4">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
@@ -857,7 +908,7 @@
            <x>0</x>
            <y>0</y>
            <width>16</width>
-           <height>16</height>
+           <height>28</height>
           </rect>
          </property>
          <property name="sizePolicy">

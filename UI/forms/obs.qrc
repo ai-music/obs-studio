@@ -37,6 +37,12 @@
 	<file>images/new.png</file>
     <file>images/hero.png</file>
     <file>images/mindful.png</file>
+	<file>images/1.png</file>
+    <file>images/2.png</file>
+    <file>images/3.png</file>
+	<file>images/4.png</file>
+    <file>images/5.png</file>
+    <file>images/6.png</file>
   </qresource>
   <qresource prefix="/settings">
     <file>images/settings/output.svg</file>
