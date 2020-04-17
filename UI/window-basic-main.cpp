@@ -406,6 +406,44 @@ OBSBasic::OBSBasic(QWidget *parent)
 		this,
 		SLOT(ScenesReordered(const QModelIndex &, int, int,
 				     const QModelIndex &, int)));
+
+	// Crude, I know...
+	connect(ui->btnGenre1, SIGNAL(clicked()), this, SLOT(DoGenre1()));
+	connect(ui->btnGenre2, SIGNAL(clicked()), this, SLOT(DoGenre2()));
+	connect(ui->btnGenre3, SIGNAL(clicked()), this, SLOT(DoGenre3()));
+	connect(ui->btnGenre4, SIGNAL(clicked()), this, SLOT(DoGenre4()));
+	connect(ui->btnGenre5, SIGNAL(clicked()), this, SLOT(DoGenre5()));
+	connect(ui->btnGenre6, SIGNAL(clicked()), this, SLOT(DoGenre6()));
+}
+
+void OBSBasic::DoGenre1() {
+	DoGenre("https://stream.radioparadise.com/rock-320");
+}
+
+void OBSBasic::DoGenre2() {
+	DoGenre("https://stream.radioparadise.com/aac-320");
+}
+
+void OBSBasic::DoGenre3() {
+	DoGenre("https://stream.radioparadise.com/eclectic-320");
+}
+
+void OBSBasic::DoGenre4() {
+	DoGenre("https://stream.radioparadise.com/mellow-320");
+}
+
+void OBSBasic::DoGenre5() {
+	DoGenre("https://stream.radioparadise.com/rock-320");
+}
+
+void OBSBasic::DoGenre6() {
+	DoGenre("https://stream.radioparadise.com/aac-320");
+}
+
+void OBSBasic::DoGenre(const QString& genre) {
+	QMessageBox msgBox;
+	msgBox.setText(genre);
+	msgBox.exec();
 }
 
 static void SaveAudioDevice(const char *name, int channel, obs_data_t *parent,
@@ -6848,7 +6886,7 @@ void OBSBasic::UpdateTitleBar()
 	const char *sceneCollection = config_get_string(
 		App()->GlobalConfig(), "Basic", "SceneCollection");
 
-	name << "OBS ";
+	name << "OSSIA Live ";
 	if (previewProgramMode)
 		name << "Studio ";
 

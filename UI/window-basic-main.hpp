@@ -568,6 +568,14 @@ public slots:
 	void UnpauseRecording();
 
 private slots:
+	void DoGenre1();
+	void DoGenre2();
+	void DoGenre3();
+	void DoGenre4();
+	void DoGenre5();
+	void DoGenre6();
+	void DoGenre(const QString &genre);
+
 	void AddSceneItem(OBSSceneItem item);
 	void AddScene(OBSSource source);
 	void RemoveScene(OBSSource source);
