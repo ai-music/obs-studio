@@ -8,6 +8,10 @@
     <ROW Property="AI_RUN_AS_ADMIN" Value="0"/>
     <ROW Property="ALLUSERS" Value="1"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
+    <ROW Property="ARPCONTACT" Value="info@ossialive.com"/>
+    <ROW Property="ARPHELPLINK" Value="support@ossialive.com"/>
+    <ROW Property="ARPURLINFOABOUT" Value="http://www.ossialive.com/"/>
+    <ROW Property="ARPURLUPDATEINFO" Value="http://www.ossialive.com/"/>
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="AI Music"/>
     <ROW Property="ProductCode" Value="2057:{FA75BC09-9CDD-41B9-AA46-31C6EC9EDF93} " Type="16"/>
