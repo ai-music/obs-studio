@@ -14,10 +14,10 @@
     <ROW Property="ARPURLUPDATEINFO" Value="http://www.ossialive.com/"/>
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="AI Music"/>
-    <ROW Property="ProductCode" Value="2057:{FA75BC09-9CDD-41B9-AA46-31C6EC9EDF93} " Type="16"/>
+    <ROW Property="ProductCode" Value="2057:{199F1E67-D4CC-46CF-89FA-6B6EAD84BA88} " Type="16"/>
     <ROW Property="ProductLanguage" Value="2057"/>
     <ROW Property="ProductName" Value="OSSIA Live"/>
-    <ROW Property="ProductVersion" Value="1.0.0" Type="32"/>
+    <ROW Property="ProductVersion" Value="0.1" Type="32"/>
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{DABC1B78-CB82-47DE-AA20-FEC555E18194}"/>
@@ -1535,8 +1535,8 @@
     <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
-    <ROW Shortcut="obs64.exe" Directory_="SHORTCUTDIR" Name="obs64.exe" Component_="obs64.exe" Target="[#obs64.exe]" Description="obs64.exe" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
-    <ROW Shortcut="obs64.exe_1" Directory_="DesktopFolder" Name="obs64.exe" Component_="obs64.exe" Target="[#obs64.exe]" Description="obs64.exe" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="obs64.exe" Directory_="SHORTCUTDIR" Name="obs64.exe" Component_="obs64.exe" Target="[#obs64.exe]" Description="obs64.exe" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="bit_Dir"/>
+    <ROW Shortcut="obs64.exe_1" Directory_="DesktopFolder" Name="obs64.exe" Component_="obs64.exe" Target="[#obs64.exe]" Description="obs64.exe" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="bit_Dir"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
     <ATTRIBUTE name="UsedTheme" value="classic"/>
