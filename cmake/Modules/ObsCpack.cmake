@@ -3,6 +3,7 @@ if(APPLE AND NOT CPACK_GENERATOR)
 	set(CPACK_GENERATOR "Bundle")
 elseif(WIN32 AND NOT CPACK_GENERATOR)
 	set(CPACK_GENERATOR "WIX" "ZIP")
+	set(CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS "1") #https://cmake.org/cmake/help/v3.9/module/InstallRequiredSystemLibraries.html
 endif()
 
 set(CPACK_PACKAGE_NAME "OBS")
