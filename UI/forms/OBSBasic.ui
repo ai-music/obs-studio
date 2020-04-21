@@ -8,7 +8,7 @@
     <x>0</x>
     <y>0</y>
     <width>1079</width>
-    <height>943</height>
+    <height>1149</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -45,7 +45,55 @@
       </item>
       <item>
        <layout class="QGridLayout" name="gridLayout">
-        <item row="1" column="1">
+        <item row="3" column="0">
+         <widget class="QPushButton" name="btnGenre3">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme=":/res/images/3.png"/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>200</width>
+            <height>200</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="btnGenre1">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme=":/res/images/1.png"/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>200</width>
+            <height>200</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QPushButton" name="btnGenre6">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme=":/res/images/6.png"/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>200</width>
+            <height>200</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
          <widget class="QPushButton" name="btnGenre5">
           <property name="text">
            <string/>
@@ -61,7 +109,7 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
+        <item row="2" column="0">
          <widget class="QPushButton" name="btnGenre2">
           <property name="text">
            <string/>
@@ -78,38 +126,13 @@
          </widget>
         </item>
         <item row="0" column="0">
-         <widget class="QPushButton" name="btnGenre1">
+         <widget class="QPushButton" name="btnConnect">
           <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset theme=":/res/images/1.png"/>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>200</width>
-            <height>200</height>
-           </size>
+           <string>Connect</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
-         <widget class="QPushButton" name="btnGenre6">
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset theme=":/res/images/6.png"/>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>200</width>
-            <height>200</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
+        <item row="1" column="1">
          <widget class="QPushButton" name="btnGenre4">
           <property name="text">
            <string/>
@@ -125,23 +148,7 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
-         <widget class="QPushButton" name="btnGenre3">
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset theme=":/res/images/3.png"/>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>200</width>
-            <height>200</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
+        <item row="4" column="0">
          <spacer name="verticalSpacer_4">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
