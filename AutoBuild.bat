@@ -3,6 +3,10 @@ REM * This is to be run in the folder ABOVE the project folder to checkout a bra
 REM * from GIT, run Cmake, Visual Studio build and Advanced Installer
 REM * So why is this BAT file within the project folder - it's a convenient place
 REM * to keep it so that it is together with the rest of the project.
+REM *
+REM * Every so often you will find that the build has got itself completely confused
+REM * and the project won't build - even if you do a clean. So delete the build64
+REM * folder and re-run the CMake command below.
 REM *******************************************************************************
 
 git clone --recursive https://github.com/ai-music/obs-studio.git

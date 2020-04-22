@@ -416,6 +416,7 @@ OBSBasic::OBSBasic(QWidget *parent)
 	connect(ui->btnGenre4, SIGNAL(clicked()), this, SLOT(DoGenre4()));
 	connect(ui->btnGenre5, SIGNAL(clicked()), this, SLOT(DoGenre5()));
 	connect(ui->btnGenre6, SIGNAL(clicked()), this, SLOT(DoGenre6()));
+	connect(&aiMusicRoom, SIGNAL(signalGotRoom(QString,QString)), this, SLOT(OnGotRoom(QString,QString)));
 }
 
 void OBSBasic::DoConnectToAiMusic() {
@@ -462,6 +463,36 @@ void OBSBasic::DoGenre5() {
 
 void OBSBasic::DoGenre6() {
 	aiMusicRoom.doStep4_updateRoomChangeStyle("AAC");
+}
+
+void OBSBasic::OnGotRoom(const QString roomId, const QString streamUrl) {
+	// Because I don't know how to change the URL of a stream directly, then
+	// for now, I'm changing it in the profile and then reloading. Would
+	// be better just to change it in session directly.
+
+	// This code is copied from OBSBasic::OBSInit()
+	const char *sceneCollection = config_get_string(
+		App()->GlobalConfig(), "Basic", "SceneCollectionFile");
+	char savePath[512];
+	char fileName[512];
+	int ret;
+
+	if (!sceneCollection)
+		throw "Failed to get scene collection name";
+
+	ret = snprintf(fileName, 512, "obs-studio/basic/scenes/%s.json",
+		       sceneCollection);
+	if (ret <= 0)
+		throw "Failed to create scene collection file name";
+
+	ret = GetConfigPath(savePath, sizeof(savePath), fileName);
+	if (ret <= 0)
+		throw "Failed to get scene collection json file path";
+	auto updated =
+		aiMusicProfileWrangler.updateStreamUrl(savePath, streamUrl);
+	if (updated) {
+		Load(savePath);
+	}
 }
 
 static void SaveAudioDevice(const char *name, int channel, obs_data_t *parent,

@@ -35,6 +35,7 @@
 #include "window-basic-about.hpp"
 #include "auth-base.hpp"
 #include "ai-music-room.hpp"
+#include "ai-music-profile-wrangler.hpp"
 
 #include <obs-frontend-internal.hpp>
 
@@ -281,6 +282,7 @@ private:
 	std::string patronJson;
 
 	AiMusicRoom aiMusicRoom;
+	AiMusicProfileWrangler aiMusicProfileWrangler;
 
 	void UpdateMultiviewProjectorMenu();
 
@@ -579,6 +581,7 @@ private slots:
 	void DoGenre4();
 	void DoGenre5();
 	void DoGenre6();
+	void OnGotRoom(const QString roomId, const QString streamUrl);
 	
 	void AddSceneItem(OBSSceneItem item);
 	void AddScene(OBSSource source);

@@ -1,9 +1,12 @@
-
+#include <util/curl/curl-helper.h>
 #include <qjsondocument.h>
 #include <qjsonobject.h>
 #include <qjsonarray.h>
 #include "obs-app.hpp"
 #include "ai-music-room.hpp"
+
+static auto curl_deleter = [](CURL *curl) { curl_easy_cleanup(curl); };
+using Curl = std::unique_ptr<CURL, decltype(curl_deleter)>;
 
 void AiMusicRoom::doStep1_createApplication() {
 	//POST https : //postman-echo.com/post
@@ -109,27 +112,30 @@ void AiMusicRoom::doStep5_deleteStream() {
 	doHttp(Step5, url, authorization, content);
 }
 
-int AiMusicRoom::currentStep = 0;
-QString AiMusicRoom::apiKey;
-QString AiMusicRoom::apiSecret;
-QString AiMusicRoom::activeApplicationToken;
-QString AiMusicRoom::roomId;
-AiMusicRoom::InFlightRequest AiMusicRoom::inFlightRequest = NoRequest;
-QStringList AiMusicRoom::curlErrors;
+AiMusicRoom *AiMusicRoom::theInstance = nullptr; 
 
-AiMusicRoom::AiMusicRoom() { }
+AiMusicRoom::AiMusicRoom() : QObject(),
+	inFlightRequest(NoRequest)
+{
+	
+	theInstance = this;
+}
 
-#include <util/curl/curl-helper.h>
-static auto curl_deleter = [](CURL *curl) { curl_easy_cleanup(curl); };
-using Curl = std::unique_ptr<CURL, decltype(curl_deleter)>;
+size_t AiMusicRoom::staticStringWrite(char *ptr, size_t size,
+					     size_t nmemb, std::string &str)
+{
+	return theInstance ? theInstance->stringWrite(ptr, size, nmemb, str)
+			   : 0;
+}
 
-size_t AiMusicRoom::string_write(char *ptr, size_t size, size_t nmemb,
+size_t AiMusicRoom::stringWrite(char *ptr, size_t size, size_t nmemb,
 					 std::string &str)
  {
 	 size_t total = size * nmemb;
 	 if (total)
 		 str.append(ptr, total);
-
+	 
+	 // Decode the response based on the request that was in-flight
 	 switch (inFlightRequest) {
 		 case Step1:	// Create Application - returns apiKey and apiSecret
 			apiKey = "123";	// Hard Coded until it's implemented
@@ -145,6 +151,9 @@ size_t AiMusicRoom::string_write(char *ptr, size_t size, size_t nmemb,
 		case Step3:	// Create a room - returns RoomId
 			roomId = "1";
 			inFlightRequest = NoRequest;
+			streamUrl = "https://urbanlive.aimusic.services:30510/hls/show.m3u8";
+			// "https://stream.radioparadise.com/rock-320"; // Example until we get the real thing
+			emit signalGotRoom(roomId,streamUrl);
 			break;
 		case Step4:	// Update a Room
 			inFlightRequest = NoRequest;
@@ -199,7 +208,7 @@ bool AiMusicRoom::doHttp(InFlightRequest thisRequest, const QString &url,
 		curl_easy_setopt(curl.get(), CURLOPT_ERRORBUFFER,
 				 curlErrorBuffer);
 		curl_easy_setopt(curl.get(), CURLOPT_WRITEFUNCTION,
-				 string_write);
+				 staticStringWrite);
 		curl_easy_setopt(curl.get(), CURLOPT_WRITEDATA, &str);
 		curl_obs_set_revoke_setting(curl.get());
 
@@ -219,6 +228,10 @@ bool AiMusicRoom::doHttp(InFlightRequest thisRequest, const QString &url,
 			curlErrors.append(curlErrorBuffer);
 			inFlightRequest = NoRequest;	
 		} else {
+			if (inFlightRequest == Step4 ||	// Step4 and Step5 don't return a 
+			    inFlightRequest == Step5) {	// body - so we need to change it here.
+				inFlightRequest = NoRequest;	
+			}
 			// OK
 		}
 		curl_slist_free_all(header);
@@ -227,6 +240,3 @@ bool AiMusicRoom::doHttp(InFlightRequest thisRequest, const QString &url,
 	return true;
  }
 
-void AiMusicRoom::httpResponse() {
-
-}
