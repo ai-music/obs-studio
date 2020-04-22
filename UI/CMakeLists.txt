@@ -207,6 +207,8 @@ set(obs_SOURCES
 	${obs_libffutil_SOURCES}
 	../deps/json11/json11.cpp
 	obs-app.cpp
+	ai-music-room.cpp
+	ai-music-profile-wrangler.cpp
 	window-dock.cpp
 	api-interface.cpp
 	window-basic-main.cpp
@@ -269,6 +271,8 @@ set(obs_HEADERS
 	${obs_libffutil_HEADERS}
 	../deps/json11/json11.hpp
 	obs-app.hpp
+	ai-music-room.hpp
+	ai-music-profile-wrangler.hpp
 	platform.hpp
 	window-dock.hpp
 	window-main.hpp
@@ -387,11 +391,15 @@ if(WIN32)
 			OUTPUT_NAME "obs${_output_suffix}")
 endif()
 
+# See https://doc.qt.io/qt-5/qtwebengine-deploying.html
+# We should just need WebEngineWidgets and WebEngineCore
 target_link_libraries(obs
 	libobs
 	Qt5::Widgets
 	Qt5::Svg
 	Qt5::Xml
+	Qt5::WebEngineCore
+	Qt5::WebEngineWidgets
 	obs-frontend-api
 	${FFMPEG_LIBRARIES}
 	${LIBCURL_LIBRARIES}
