@@ -14,10 +14,10 @@
     <ROW Property="ARPURLUPDATEINFO" Value="http://www.ossialive.com/"/>
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="AI Music"/>
-    <ROW Property="ProductCode" Value="2057:{199F1E67-D4CC-46CF-89FA-6B6EAD84BA88} " Type="16"/>
+    <ROW Property="ProductCode" Value="2057:{C00D92BC-C383-4923-B023-7A82E74E4C5C} " Type="16"/>
     <ROW Property="ProductLanguage" Value="2057"/>
     <ROW Property="ProductName" Value="OSSIA Live"/>
-    <ROW Property="ProductVersion" Value="0.1" Type="32"/>
+    <ROW Property="ProductVersion" Value="0.01" Type="32"/>
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{DABC1B78-CB82-47DE-AA20-FEC555E18194}"/>

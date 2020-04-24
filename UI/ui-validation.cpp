@@ -64,10 +64,10 @@ UIValidation::StreamSettingsConfirmation(QWidget *parent, OBSService service)
 	char const *serviceType = obs_service_get_type(service);
 	bool isCustomUrlService = (strcmp(serviceType, "rtmp_custom") == 0);
 
-	char const *streamUrl = obs_service_get_url(service);
+	char const *streamUri = obs_service_get_url(service);
 	char const *streamKey = obs_service_get_key(service);
 
-	bool hasStreamUrl = (streamUrl != NULL && streamUrl[0] != '\0');
+	bool hasStreamUrl = (streamUri != NULL && streamUri[0] != '\0');
 	bool hasStreamKey = ((streamKey != NULL && streamKey[0] != '\0') ||
 			     isCustomUrlService);
 

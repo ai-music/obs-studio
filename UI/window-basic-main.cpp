@@ -410,29 +410,39 @@ OBSBasic::OBSBasic(QWidget *parent)
 	// Crude, I know...
 	connect(ui->btnConnect, SIGNAL(clicked()), this,
 		SLOT(DoConnectToAiMusic()));
+	connect(ui->btnDisconnect, SIGNAL(clicked()), this,
+		SLOT(DoDisconnectFromAiMusic()));
 	connect(ui->btnGenre1, SIGNAL(clicked()), this, SLOT(DoGenre1()));
 	connect(ui->btnGenre2, SIGNAL(clicked()), this, SLOT(DoGenre2()));
 	connect(ui->btnGenre3, SIGNAL(clicked()), this, SLOT(DoGenre3()));
 	connect(ui->btnGenre4, SIGNAL(clicked()), this, SLOT(DoGenre4()));
 	connect(ui->btnGenre5, SIGNAL(clicked()), this, SLOT(DoGenre5()));
 	connect(ui->btnGenre6, SIGNAL(clicked()), this, SLOT(DoGenre6()));
-	connect(&aiMusicRoom, SIGNAL(signalGotRoom(QString,QString)), this, SLOT(OnGotRoom(QString,QString)));
+	connect(&aiMusicRoom, SIGNAL(signalGotRoom(QString, QString, QString)),
+		this, SLOT(OnGotRoom(QString,QString,QString)));
+
+#ifndef _DEBUG
+	ui->btnConnect->hide();
+	ui->btnDisconnect->hide();
+#endif
 }
 
 void OBSBasic::DoConnectToAiMusic() {
-	aiMusicRoom.doStep1_createApplication();
+	aiMusicRoom.doConnect();
 }
 
-void OBSBasic::DoGenre1() {
+void OBSBasic::DoDisconnectFromAiMusic()
+{
+	aiMusicRoom.doDisconnect();
+}
 
-	// Here is some hard-won example code to toggle the source name.
-	//const char *name1 = "Ossia-Music";
-	//const char *name2 = "Changed";
+// "AMBIENT","COUNTRY","ACOUSTIC","HIP_HOP","JAZZ","CLASSICAL","POP","REGGAE","ROCK","DEEP_HOUSE","DRUM_BASS","GARAGE_GRIME_BASSLINE","HOUSE","LO_FI"}
 
+void OBSBasic::changeSourceName(const QString& name) {
 	//OBSScene scene =
 	//	GetCurrentScene(); // Unfortunately, there doesn't seem to be an
 	//auto sceneItem =
-	//	obs_scene_find_source(scene, name1); // obs_source_set_input
+	//	obs_scene_find_source(scene, name); // obs_source_set_input
 	//auto source = obs_sceneitem_get_source(sceneItem);
 	//if (sceneItem) {
 	//	obs_source_set_name(source, name2);
@@ -441,57 +451,71 @@ void OBSBasic::DoGenre1() {
 	//	source = obs_sceneitem_get_source(sceneItem);
 	//	obs_source_set_name(source, name1);
 	//}
+}
 
-	aiMusicRoom.doStep4_updateRoomChangeStyle("Rock");
+void OBSBasic::DoMusicStyle(const QString &nusicStyle) {
+	aiMusicRoom.doChangeMusicStyle(nusicStyle);
+}
+
+void OBSBasic::DoGenre1() {
+
+	// Here is some hard-won example code to toggle the source name.
+	//const char *name1 = "Ossia-Music";
+	//const char *name2 = "Changed";
+	DoMusicStyle("ROCK");
 }
 
 void OBSBasic::DoGenre2() {
-	aiMusicRoom.doStep4_updateRoomChangeStyle("AAC");
+	DoMusicStyle("JAZZ");
 }
 
 void OBSBasic::DoGenre3() {
-	aiMusicRoom.doStep4_updateRoomChangeStyle("Eclectic");
+	DoMusicStyle("ACOUSTIC");
 }
 
 void OBSBasic::DoGenre4() {
-	aiMusicRoom.doStep4_updateRoomChangeStyle("Mellow");
+	DoMusicStyle("AMBIENT");
 }
 
 void OBSBasic::DoGenre5() {
-	aiMusicRoom.doStep4_updateRoomChangeStyle("Rock");
+	DoMusicStyle("DRUM_BASS");
 }
 
 void OBSBasic::DoGenre6() {
-	aiMusicRoom.doStep4_updateRoomChangeStyle("AAC");
+	DoMusicStyle("JAZZ");
 }
 
-void OBSBasic::OnGotRoom(const QString roomId, const QString streamUrl) {
-	// Because I don't know how to change the URL of a stream directly, then
-	// for now, I'm changing it in the profile and then reloading. Would
-	// be better just to change it in session directly.
+void OBSBasic::onFailed_Step1_createApplication() {
 
-	// This code is copied from OBSBasic::OBSInit()
-	const char *sceneCollection = config_get_string(
-		App()->GlobalConfig(), "Basic", "SceneCollectionFile");
-	char savePath[512];
-	char fileName[512];
-	int ret;
+}
+void OBSBasic::onFailed_Step2_authenticateApplication() {
 
-	if (!sceneCollection)
-		throw "Failed to get scene collection name";
+}
+void OBSBasic::onFailed_Step3_createRoomStartPlayback() {
 
-	ret = snprintf(fileName, 512, "obs-studio/basic/scenes/%s.json",
-		       sceneCollection);
-	if (ret <= 0)
-		throw "Failed to create scene collection file name";
+}
+void OBSBasic::onFailed_Step4_updateRoomChangeStyle() {
 
-	ret = GetConfigPath(savePath, sizeof(savePath), fileName);
-	if (ret <= 0)
-		throw "Failed to get scene collection json file path";
-	auto updated =
-		aiMusicProfileWrangler.updateStreamUrl(savePath, streamUrl);
-	if (updated) {
-		Load(savePath);
+}
+void OBSBasic::onFailed_Step5_deleteRoom() {
+
+}
+
+void OBSBasic::OnGotRoom(QString roomId, QString musicStyle, QString streamUri) {
+	// Load in a correctly configured scene for the stream.
+
+	char szSceneFolder[512];
+
+	if (GetConfigPath(szSceneFolder, sizeof(szSceneFolder),
+			  "obs-studio/basic/scenes") < 0) {
+		return;
+	}
+
+	const QString sceneFolder(szSceneFolder);
+	const QString newFilePath = aiMusicProfileWrangler.makeOssiaSceneFile(
+		sceneFolder, streamUri);
+	if (!newFilePath.isEmpty()) {
+		Load(newFilePath.toStdString().data());
 	}
 }
 
@@ -4073,6 +4097,8 @@ void OBSBasic::closeEvent(QCloseEvent *event)
 	auth.reset();
 
 	delete extraBrowsers;
+
+	aiMusicRoom.preDelete();
 
 	config_set_string(App()->GlobalConfig(), "BasicWindow", "DockState",
 			  saveState().toBase64().constData());

@@ -29,7 +29,7 @@ del tag.txt
 cmake -DDepsPath:STRING=C:/OBS/Deps/win64 -DQTDIR:STRING=C:/Qt/5.14.2/msvc2017_64 -S C:/OBS/obs-studio -B C:/OBS/obs-studio/build64
 
 cd build64
-SET tag="0.1"
+SET tag="0.01"
 
 REM To-Do hard code tag into source code as version
 "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild" obs-studio.sln /p:Configuration=Debug /p:Platform=x64

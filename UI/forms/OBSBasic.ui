@@ -161,6 +161,13 @@
           </property>
          </spacer>
         </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="btnDisconnect">
+          <property name="text">
+           <string>Disconnect</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item>
@@ -861,7 +868,7 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>90</width>
+           <width>91</width>
            <height>16</height>
           </rect>
          </property>
@@ -915,7 +922,7 @@
            <x>0</x>
            <y>0</y>
            <width>16</width>
-           <height>28</height>
+           <height>16</height>
           </rect>
          </property>
          <property name="sizePolicy">

@@ -2,7 +2,7 @@
 
 #include <QString>
 
-class AiMusicProfileWrangler {
+class AiMusicProfileWrangler { 
 public:
-	bool updateStreamUrl(const QString& jsonPath, const QString &streamUrl);
+	QString makeOssiaSceneFile(const QString& jsonPath, const QString &streamUri);
 };

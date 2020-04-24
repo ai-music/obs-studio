@@ -572,16 +572,27 @@ public slots:
 	void PauseRecording();
 	void UnpauseRecording();
 
+	void changeSourceName(const QString &musicStyle);
+
+
 private slots:
 
 	void DoConnectToAiMusic();
+	void DoDisconnectFromAiMusic();
+	void DoMusicStyle(const QString &nusicStyle);
 	void DoGenre1();
 	void DoGenre2();
 	void DoGenre3();
 	void DoGenre4();
 	void DoGenre5();
 	void DoGenre6();
-	void OnGotRoom(const QString roomId, const QString streamUrl);
+	void OnGotRoom(QString roomId, QString musicStyle, QString streamUri);
+
+	void onFailed_Step1_createApplication();
+	void onFailed_Step2_authenticateApplication();
+	void onFailed_Step3_createRoomStartPlayback();
+	void onFailed_Step4_updateRoomChangeStyle();
+	void onFailed_Step5_deleteRoom();
 	
 	void AddSceneItem(OBSSceneItem item);
 	void AddScene(OBSSource source);
