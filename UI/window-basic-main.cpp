@@ -421,10 +421,10 @@ OBSBasic::OBSBasic(QWidget *parent)
 	connect(&aiMusicRoom, SIGNAL(signalGotRoom(QString, QString, QString)),
 		this, SLOT(OnGotRoom(QString,QString,QString)));
 
-#ifndef _DEBUG
-	ui->btnConnect->hide();
-	ui->btnDisconnect->hide();
-#endif
+//#ifndef _DEBUG
+//	ui->btnConnect->hide();
+//	ui->btnDisconnect->hide();
+//#endif
 }
 
 void OBSBasic::DoConnectToAiMusic() {
@@ -458,23 +458,19 @@ void OBSBasic::DoMusicStyle(const QString &nusicStyle) {
 }
 
 void OBSBasic::DoGenre1() {
-
-	// Here is some hard-won example code to toggle the source name.
-	//const char *name1 = "Ossia-Music";
-	//const char *name2 = "Changed";
 	DoMusicStyle("ROCK");
 }
 
 void OBSBasic::DoGenre2() {
-	DoMusicStyle("JAZZ");
+	DoMusicStyle("HIP_HOP");
 }
 
 void OBSBasic::DoGenre3() {
-	DoMusicStyle("ACOUSTIC");
+	DoMusicStyle("HOUSE");
 }
 
 void OBSBasic::DoGenre4() {
-	DoMusicStyle("AMBIENT");
+	DoMusicStyle("POP");
 }
 
 void OBSBasic::DoGenre5() {
