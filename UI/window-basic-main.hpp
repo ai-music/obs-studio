@@ -574,6 +574,15 @@ public slots:
 
 	void changeSourceName(const QString &musicStyle);
 
+	void setUiConnecting();
+	void setUiConnected();
+	void setUiDisconnecting();
+	void setUiDisconnected();
+
+	void setUiForMusicStyle(const QString& musicStyle);
+	void highlightButton( QPushButton* btn, const QString& musicStyle);
+	void setupBtn(QPushButton *btn, const QString &musicStyle,
+		      const QString imgUrl);
 
 private slots:
 
@@ -587,12 +596,16 @@ private slots:
 	void DoGenre5();
 	void DoGenre6();
 	void OnGotRoom(QString roomId, QString musicStyle, QString streamUri);
+	void OnChangedRoomStyle(QString roomId, QString musicStyle, QString streamUri);
+	void OnDeletedRoom(QString roomId, QString musicStyle,
+			   QString streamUri);
 
-	void onFailed_Step1_createApplication();
-	void onFailed_Step2_authenticateApplication();
-	void onFailed_Step3_createRoomStartPlayback();
-	void onFailed_Step4_updateRoomChangeStyle();
-	void onFailed_Step5_deleteRoom();
+	void OnHttpError(int step, QString url, QString curlError);
+	void onFailed_Step1_createApplication(QString data);
+	void onFailed_Step2_authenticateApplication(QString data);
+	void onFailed_Step3_createRoomStartPlayback(QString data);
+	void onFailed_Step4_updateRoomChangeStyle(QString data);
+	void onFailed_Step5_deleteRoom(QString data);
 	
 	void AddSceneItem(OBSSceneItem item);
 	void AddScene(OBSSource source);

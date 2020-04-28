@@ -30,6 +30,7 @@
 #include <QSizePolicy>
 #include <QScrollBar>
 #include <QTextStream>
+#include <QPainter>
 
 #include <util/dstr.h>
 #include <util/util.hpp>
@@ -89,6 +90,9 @@ struct QCefCookieManager;
 
 QCef *cef = nullptr;
 QCefCookieManager *panel_cookies = nullptr;
+
+const int minBtnWidth = 100;
+const int minBtnHeight = 100;
 
 void DestroyPanelCookieManager();
 
@@ -412,14 +416,56 @@ OBSBasic::OBSBasic(QWidget *parent)
 		SLOT(DoConnectToAiMusic()));
 	connect(ui->btnDisconnect, SIGNAL(clicked()), this,
 		SLOT(DoDisconnectFromAiMusic()));
+
+	ui->btnConnect->setMinimumWidth(minBtnWidth);
+	ui->btnDisconnect->setMinimumWidth(minBtnWidth);
+
+	setupBtn(ui->btnGenre1, "ROCK", ":res/images/1.png");
+	setupBtn(ui->btnGenre2, "HIP_HOP", ":res/images/2.png");
+	setupBtn(ui->btnGenre3, "HOUSE", ":res/images/3.png");
+	setupBtn(ui->btnGenre4, "POP", ":res/images/4.png");
+	setupBtn(ui->btnGenre5, "DRUM_BASS", ":res/images/5.png");
+	setupBtn(ui->btnGenre6, "JAZZ", ":res/images/6.png");
+
 	connect(ui->btnGenre1, SIGNAL(clicked()), this, SLOT(DoGenre1()));
 	connect(ui->btnGenre2, SIGNAL(clicked()), this, SLOT(DoGenre2()));
 	connect(ui->btnGenre3, SIGNAL(clicked()), this, SLOT(DoGenre3()));
 	connect(ui->btnGenre4, SIGNAL(clicked()), this, SLOT(DoGenre4()));
 	connect(ui->btnGenre5, SIGNAL(clicked()), this, SLOT(DoGenre5()));
 	connect(ui->btnGenre6, SIGNAL(clicked()), this, SLOT(DoGenre6()));
+
 	connect(&aiMusicRoom, SIGNAL(signalGotRoom(QString, QString, QString)),
 		this, SLOT(OnGotRoom(QString,QString,QString)));
+
+	connect(&aiMusicRoom,
+		SIGNAL(signalChangedRoomStyle(QString, QString, QString)), this,
+		SLOT(OnChangedRoomStyle(QString, QString, QString)));
+
+	connect(&aiMusicRoom,
+		SIGNAL(signalDeletedRoom(QString, QString, QString)), this,
+		SLOT(OnDeletedRoom(QString, QString, QString)));
+
+	connect(&aiMusicRoom,
+		SIGNAL(signal_httpError(int, QString, QString)),
+		this, SLOT(OnHttpError(int, QString, QString)));
+	
+	connect(&aiMusicRoom,
+		SIGNAL(signal_failed_Step1_createApplication(QString)), this,
+		SLOT(onFailed_Step1_createApplication(QString)));
+	connect(&aiMusicRoom,
+		SIGNAL(signal_failed_Step2_authenticateApplication(QString)),
+		this, SLOT(onFailed_Step2_authenticateApplication(QString)));
+	connect(&aiMusicRoom,
+		SIGNAL(signal_failed_Step3_createRoomStartPlayback(QString)),
+		this,
+		SLOT(void onFailed_Step3_createRoomStartPlayback(QString)));
+	connect(&aiMusicRoom,
+		SIGNAL(signal_failed_Step4_updateRoomChangeStyle(QString)),
+		this, SLOT(onFailed_Step4_updateRoomChangeStyle(QString)));
+	connect(&aiMusicRoom, SIGNAL(signal_failed_Step5_deleteRoom(QString)),
+		this, SLOT(onFailed_Step5_deleteRoom(QString)));
+
+	setUiDisconnected();
 
 //#ifndef _DEBUG
 //	ui->btnConnect->hide();
@@ -428,15 +474,15 @@ OBSBasic::OBSBasic(QWidget *parent)
 }
 
 void OBSBasic::DoConnectToAiMusic() {
+	setUiConnecting();
 	aiMusicRoom.doConnect();
 }
 
 void OBSBasic::DoDisconnectFromAiMusic()
 {
+	setUiDisconnecting();
 	aiMusicRoom.doDisconnect();
 }
-
-// "AMBIENT","COUNTRY","ACOUSTIC","HIP_HOP","JAZZ","CLASSICAL","POP","REGGAE","ROCK","DEEP_HOUSE","DRUM_BASS","GARAGE_GRIME_BASSLINE","HOUSE","LO_FI"}
 
 void OBSBasic::changeSourceName(const QString& name) {
 	//OBSScene scene =
@@ -458,43 +504,74 @@ void OBSBasic::DoMusicStyle(const QString &nusicStyle) {
 }
 
 void OBSBasic::DoGenre1() {
-	DoMusicStyle("ROCK");
+	DoMusicStyle(ui->btnGenre1->toolTip());
 }
 
 void OBSBasic::DoGenre2() {
-	DoMusicStyle("HIP_HOP");
+	DoMusicStyle(ui->btnGenre2->toolTip());
 }
 
 void OBSBasic::DoGenre3() {
-	DoMusicStyle("HOUSE");
+	DoMusicStyle(ui->btnGenre3->toolTip());
 }
 
 void OBSBasic::DoGenre4() {
-	DoMusicStyle("POP");
+	DoMusicStyle(ui->btnGenre4->toolTip());
 }
 
 void OBSBasic::DoGenre5() {
-	DoMusicStyle("DRUM_BASS");
+	DoMusicStyle(ui->btnGenre5->toolTip());
 }
 
 void OBSBasic::DoGenre6() {
-	DoMusicStyle("JAZZ");
+	DoMusicStyle(ui->btnGenre6->toolTip());
 }
 
-void OBSBasic::onFailed_Step1_createApplication() {
+void OBSBasic::OnHttpError(int step, QString url, QString curlError) {
+	QString message = "HTTP request to " + url + " errored:\n\n" + curlError + "\n\nwhilst attempting step " +
+			  QString::number(step) + ".";
+	QMessageBox msgBox(QMessageBox::Warning, "AiMusic HTTP Error", message,
+			   QMessageBox::Ok);
+	msgBox.exec();
+} 
 
+void OBSBasic::onFailed_Step1_createApplication(QString data)
+{
+	// Currently this will always fail - so don't bother to notify user.
+	//QMessageBox msgBox(QMessageBox::Warning, "Failed to create application", data, QMessageBox::Ok);
+	//msgBox.exec();
 }
-void OBSBasic::onFailed_Step2_authenticateApplication() {
 
+void OBSBasic::onFailed_Step2_authenticateApplication(QString data)
+{
+	QMessageBox msgBox(QMessageBox::Warning,
+			   "Failed to authenticate application", data,
+			   QMessageBox::Ok);
+	msgBox.exec();
+	setUiDisconnected();
 }
-void OBSBasic::onFailed_Step3_createRoomStartPlayback() {
 
+void OBSBasic::onFailed_Step3_createRoomStartPlayback(QString data)
+{
+	QMessageBox msgBox(QMessageBox::Warning, "Failed to create room", data,
+			   QMessageBox::Ok);
+	msgBox.exec();
+	setUiDisconnected();
 }
-void OBSBasic::onFailed_Step4_updateRoomChangeStyle() {
 
+void OBSBasic::onFailed_Step4_updateRoomChangeStyle(QString data)
+{
+	QMessageBox msgBox(QMessageBox::Warning, "Failed to change room style",
+			   data, QMessageBox::Ok);
+	msgBox.exec();
 }
-void OBSBasic::onFailed_Step5_deleteRoom() {
 
+void OBSBasic::onFailed_Step5_deleteRoom(QString data)
+{
+	QMessageBox msgBox(QMessageBox::Warning, "Failed to delete room.", data,
+			   QMessageBox::Ok);
+	msgBox.exec();
+	setUiConnected();
 }
 
 void OBSBasic::OnGotRoom(QString roomId, QString musicStyle, QString streamUri) {
@@ -513,6 +590,124 @@ void OBSBasic::OnGotRoom(QString roomId, QString musicStyle, QString streamUri) 
 	if (!newFilePath.isEmpty()) {
 		Load(newFilePath.toStdString().data());
 	}
+	setUiConnected();
+	setUiForMusicStyle(musicStyle);
+	//QString message("You are now connected to AiMusic playing " + musicStyle + ".");
+
+	//QMessageBox msgBox(QMessageBox::Information, "AI Music Conneted", message, QMessageBox::Ok);
+	//msgBox.exec();
+}
+
+void OBSBasic::OnDeletedRoom(QString,  QString, QString)
+{
+	setUiDisconnected();
+	
+
+	//QMessageBox msgBox(QMessageBox::Warning, "AiMusic HTTP Disconnected", "You are not disconnected from AiMusic.",
+	//		   QMessageBox::Ok);
+	//msgBox.exec();
+}
+
+void OBSBasic::OnChangedRoomStyle(QString roomId, QString musicStyle, QString streamUri) {
+	setUiForMusicStyle(musicStyle);
+
+	//QMessageBox msgBox(QMessageBox::Warning, "AiMusic Music Style Changing",
+	//		   "Music style changing to " + musicStyle,
+	//		   QMessageBox::Ok);
+	//msgBox.exec();
+}
+
+void OBSBasic::setUiConnecting() {
+	ui->btnConnect->setEnabled(false);
+	ui->btnDisconnect->setEnabled(false);
+	ui->btnGenre1->setEnabled(false);
+	ui->btnGenre2->setEnabled(false);
+	ui->btnGenre3->setEnabled(false);
+	ui->btnGenre4->setEnabled(false);
+	ui->btnGenre5->setEnabled(false);
+	ui->btnGenre6->setEnabled(false);
+}
+
+void OBSBasic::setUiConnected() {
+	ui->btnConnect->setEnabled(false);
+	ui->btnDisconnect->setEnabled(true);
+	ui->btnGenre1->setEnabled(true);
+	ui->btnGenre2->setEnabled(true);
+	ui->btnGenre3->setEnabled(true);
+	ui->btnGenre4->setEnabled(true);
+	ui->btnGenre5->setEnabled(true);
+	ui->btnGenre6->setEnabled(true);
+}
+
+void OBSBasic::setUiDisconnecting() {
+	ui->btnConnect->setEnabled(false);
+	ui->btnDisconnect->setEnabled(false);
+	ui->btnGenre1->setEnabled(false);
+	ui->btnGenre2->setEnabled(false);
+	ui->btnGenre3->setEnabled(false);
+	ui->btnGenre4->setEnabled(false);
+	ui->btnGenre5->setEnabled(false);
+	ui->btnGenre6->setEnabled(false);
+}
+
+void OBSBasic::setUiDisconnected() {
+	ui->btnConnect->setEnabled(true);
+	ui->btnDisconnect->setEnabled(false);
+	ui->btnGenre1->setEnabled(false);
+	ui->btnGenre2->setEnabled(false);
+	ui->btnGenre3->setEnabled(false);
+	ui->btnGenre4->setEnabled(false);
+	ui->btnGenre5->setEnabled(false);
+	ui->btnGenre6->setEnabled(false);
+	setUiForMusicStyle("");
+}
+
+void OBSBasic::setUiForMusicStyle(const QString &musicStyle) {
+	highlightButton(ui->btnGenre1, musicStyle);
+	highlightButton(ui->btnGenre2, musicStyle);
+	highlightButton(ui->btnGenre3, musicStyle);
+	highlightButton(ui->btnGenre4, musicStyle);
+	highlightButton(ui->btnGenre5, musicStyle);
+	highlightButton(ui->btnGenre6, musicStyle);
+}
+
+void OBSBasic::highlightButton(QPushButton *btn, const QString &musicStyle) {
+	if( btn->toolTip() == musicStyle ){
+		btn->setStyleSheet("background-color:LightGray;");
+	} else {
+		btn->setStyleSheet("background-color:Gray;");
+	}
+}
+
+void OBSBasic::setupBtn(QPushButton *btn, const QString &musicStyle, const QString imgUrl)
+{
+	btn->setToolTip(musicStyle);
+	btn->setMinimumWidth(minBtnWidth);
+	btn->setMinimumHeight(minBtnHeight);
+	btn->setStyleSheet("background-color:Gray;");
+
+	QFont font("Arial", minBtnHeight / 5);
+	font.setBold(true);
+	QFontMetrics fontMetrics(font);
+	const int fontWidth = fontMetrics.horizontalAdvance(musicStyle);
+	const int fontHeight = fontMetrics.capHeight();
+
+	QPixmap pixmap(imgUrl);
+	QPainter painter(&pixmap);
+
+	painter.setFont(font);
+	painter.setPen(QColor(200, 100, 0));
+
+	//painter.drawText(QPoint((minBtnWidth - fontWidth)/2,
+	//			(minBtnWidth-fontHeight)/2),
+	//		 musicStyle);
+	QString btnText(musicStyle);
+	btnText.replace('_', ' ');
+	painter.drawText(QPoint(10,
+			10+fontHeight), btnText);
+
+	QIcon ButtonIcon(pixmap);
+	btn->setIcon(ButtonIcon);
 }
 
 static void SaveAudioDevice(const char *name, int channel, obs_data_t *parent,

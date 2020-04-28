@@ -8,6 +8,8 @@
 class AiMusicRoom : public QObject{
 Q_OBJECT
 
+// "AMBIENT","COUNTRY","ACOUSTIC","HIP_HOP","JAZZ","CLASSICAL","POP","REGGAE","ROCK","DEEP_HOUSE","DRUM_BASS","GARAGE_GRIME_BASSLINE","HOUSE","LO_FI"}
+
 public:
 	AiMusicRoom();
 	~AiMusicRoom();
@@ -21,18 +23,19 @@ public:
 
 	QString getStreamUrl() { return streamUri; }
 signals:
-	void signalGotRoom(const QString& roomId, const QString& style,
-		const QString& streamUri);
-	void signalChangedRoomStyle(const QString &roomId, const QString &style,
-				const QString &streamUri);
-	void signalDeletedRoom(const QString &roomId, const QString &style,
-			       const QString &streamUri);
+	void signalGotRoom(QString roomId, QString style,
+		 QString streamUri);
+	void signalChangedRoomStyle(QString roomId, QString style,
+				 QString streamUri);
+	void signalDeletedRoom(QString roomId, QString style,
+			        QString streamUri);
 
-	void signal_failed_Step1_createApplication();
-	void signal_failed_Step2_authenticateApplication();
-	void signal_failed_Step3_createRoomStartPlayback();
-	void signal_failed_Step4_updateRoomChangeStyle();
-	void signal_failed_Step5_deleteRoom();
+	void signal_failed_Step1_createApplication(QString data);
+	void signal_failed_Step2_authenticateApplication(QString data);
+	void signal_failed_Step3_createRoomStartPlayback(QString data);
+	void signal_failed_Step4_updateRoomChangeStyle(QString data);
+	void signal_failed_Step5_deleteRoom(QString data);
+	void signal_httpError(int step, QString url, QString curlError);
 
 private:
 	void doStep1_createApplication();

@@ -233,7 +233,9 @@ size_t AiMusicRoom::stringWrite(char *ptr, size_t size, size_t nmemb,
 				 createdAt = jsonDataObject["createdAt"].toString();
 				 id = jsonDataObject["id"].toString();
 			 } else {
-				 emit signal_failed_Step1_createApplication();
+				 emit signal_failed_Step1_createApplication(
+					 QJsonDocument(jsonObject).toJson(
+						 QJsonDocument::Compact));
 			 }
 			 // Hard Coded until it's implemented
 			 apiKey = "eec1be1df1d625d7be20f0eb"; 
@@ -249,7 +251,9 @@ size_t AiMusicRoom::stringWrite(char *ptr, size_t size, size_t nmemb,
 					 jsonDataObject["token"].toString();
 				 doStep3_createRoomStartPlayback( musicStyle);
 			 } else {
-				 emit signal_failed_Step2_authenticateApplication();
+				 emit signal_failed_Step2_authenticateApplication(
+					 QJsonDocument(jsonObject)
+						 .toJson(QJsonDocument::Compact));
 			 }
 		break;
 		case Step3:	// Create a room - returns RoomId
@@ -261,7 +265,10 @@ size_t AiMusicRoom::stringWrite(char *ptr, size_t size, size_t nmemb,
 				// "https://stream.radioparadise.com/rock-320"; // Example until we get the real thing
 				emit signalGotRoom(id, musicStyle, streamUri);
 			} else {
-				emit signal_failed_Step3_createRoomStartPlayback();
+				emit signal_failed_Step3_createRoomStartPlayback(
+					QJsonDocument(jsonObject)
+						.toJson(QJsonDocument::Compact));
+				;
 			}
 		break;
 		case Step4:	// Update a Room
@@ -271,7 +278,10 @@ size_t AiMusicRoom::stringWrite(char *ptr, size_t size, size_t nmemb,
 				 decodeRoomJson(jsonDataObject);
 				 emit signalChangedRoomStyle(id, musicStyle, streamUri);
 			 } else {
-				 emit signal_failed_Step4_updateRoomChangeStyle();
+				 emit signal_failed_Step4_updateRoomChangeStyle(
+					 QJsonDocument(jsonObject)
+						 .toJson(QJsonDocument::Compact));
+				 ;
 			 }
 
 		break;
@@ -283,7 +293,9 @@ size_t AiMusicRoom::stringWrite(char *ptr, size_t size, size_t nmemb,
 				activeApplicationToken.clear();
 				emit signalDeletedRoom(id, musicStyle, streamUri);
 			} else {
-				emit signal_failed_Step5_deleteRoom();
+				emit signal_failed_Step5_deleteRoom(
+					QJsonDocument(jsonObject)
+						.toJson(QJsonDocument::Compact));
 			}
 			break;
 		case NoRequest:
@@ -292,7 +304,8 @@ size_t AiMusicRoom::stringWrite(char *ptr, size_t size, size_t nmemb,
 
 	 return total;
 }
- void AiMusicRoom::decodeRoomJson(const QJsonObject &jsonDataObject) {
+
+void AiMusicRoom::decodeRoomJson(const QJsonObject &jsonDataObject) {
 	 QJsonArray musicStyleArray = jsonDataObject["musicStyle"].toArray();
 	 musicStyle = (musicStyleArray.count() > 0)
 			      ? musicStyleArray.at(0).toString()
@@ -378,23 +391,32 @@ bool AiMusicRoom::doHttp(InFlightRequest thisRequest, const QString &url,
 		if (code != CURLE_OK) {
 			// Error
 			curlErrors.append(curlErrorBuffer);
+			QString strCurlError(curl_easy_strerror(code));
+			emit signal_httpError(
+				static_cast<int>(inFlightRequest),
+				url,
+				strCurlError);
+
 			switch (inFlightRequest) {
 			case Step1:
-				emit signal_failed_Step1_createApplication();
+				emit signal_failed_Step1_createApplication(
+					strCurlError);
 				break;
 			case Step2:
-				emit
-				signal_failed_Step2_authenticateApplication();
+				emit signal_failed_Step2_authenticateApplication(
+					strCurlError);
 				break;
 			case Step3:
-				emit
-				signal_failed_Step3_createRoomStartPlayback();
+				emit signal_failed_Step3_createRoomStartPlayback(
+					strCurlError);
 				break;
 			case Step4:
-				emit signal_failed_Step4_updateRoomChangeStyle();
+				emit signal_failed_Step4_updateRoomChangeStyle(
+					strCurlError);
 				break;
 			case Step5:
-				emit signal_failed_Step5_deleteRoom();
+				emit signal_failed_Step5_deleteRoom(
+					strCurlError);
 				break;
 			}
 
