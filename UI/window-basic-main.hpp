@@ -572,6 +572,7 @@ public slots:
 	void PauseRecording();
 	void UnpauseRecording();
 
+	void aiMusicSetupUI();
 	void changeSourceName(const QString &musicStyle);
 
 	void setUiConnecting();

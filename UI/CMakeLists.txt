@@ -209,6 +209,7 @@ set(obs_SOURCES
 	obs-app.cpp
 	ai-music-room.cpp
 	ai-music-profile-wrangler.cpp
+        ai-music-window-basic-main.cpp
 	window-dock.cpp
 	api-interface.cpp
 	window-basic-main.cpp
