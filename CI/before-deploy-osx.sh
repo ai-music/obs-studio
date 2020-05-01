@@ -38,37 +38,29 @@ fi
 ../CI/install/osx/packageApp.sh
 
 # fix obs outputs plugin it doesn't play nicely with dylibBundler at the moment
-cp /opt/local/lib/libmbedtls.2.22.0.dylib ./OBS.app/Contents/Frameworks/
-#-cp /usr/local/opt/mbedtls/lib/libmbedtls.12.dylib ./OBS.app/Contents/Frameworks/
-cp /opt/local/lib/libmbedcrypto.2.22.0.dylib ./OBS.app/Contents/Frameworks/
-#-cp /usr/local/opt/mbedtls/lib/libmbedcrypto.3.dylib ./OBS.app/Contents/Frameworks/
-cp /opt/local/lib/libmbedx509.2.22.0.dylib ./OBS.app/Contents/Frameworks/
-#-cp /usr/local/opt/mbedtls/lib/libmbedx509.0.dylib ./OBS.app/Contents/Frameworks/
+cp /usr/local/opt/mbedtls/lib/libmbedtls.12.dylib ./OBS.app/Contents/Frameworks/
+cp /usr/local/opt/mbedtls/lib/libmbedcrypto.3.dylib ./OBS.app/Contents/Frameworks/
+cp /usr/local/opt/mbedtls/lib/libmbedx509.0.dylib ./OBS.app/Contents/Frameworks/
 chmod +w ./OBS.app/Contents/Frameworks/*.dylib
-install_name_tool -id @executable_path/../Frameworks/libmbedtls.2.22.0.dylib ./OBS.app/Contents/Frameworks/libmbedtls.2.22.0.dylib
-install_name_tool -id @executable_path/../Frameworks/libmbedcrypto.2.22.0.dylib ./OBS.app/Contents/Frameworks/libmbedcrypto.2.22.0.dylib
-install_name_tool -id @executable_path/../Frameworks/libmbedx509.2.22.0.dylib ./OBS.app/Contents/Frameworks/libmbedx509.2.22.0.dylib
-install_name_tool -change libmbedtls.2.22.0.dylib @executable_path/../Frameworks/libmbedtls.2.22.0.dylib ./OBS.app/Contents/Plugins/obs-outputs.so
-install_name_tool -change libmbedcrypto.2.22.0.dylib @executable_path/../Frameworks/libmbedcrypto.2.22.0.dylib ./OBS.app/Contents/Plugins/obs-outputs.so
-install_name_tool -change libmbedx509.2.22.0.dylib @executable_path/../Frameworks/libmbedx509.2.22.0.dylib ./OBS.app/Contents/Plugins/obs-outputs.so
+install_name_tool -id @executable_path/../Frameworks/libmbedtls.12.dylib ./OBS.app/Contents/Frameworks/libmbedtls.12.dylib
+install_name_tool -id @executable_path/../Frameworks/libmbedcrypto.3.dylib ./OBS.app/Contents/Frameworks/libmbedcrypto.3.dylib
+install_name_tool -id @executable_path/../Frameworks/libmbedx509.0.dylib ./OBS.app/Contents/Frameworks/libmbedx509.0.dylib
+install_name_tool -change libmbedtls.12.dylib @executable_path/../Frameworks/libmbedtls.12.dylib ./OBS.app/Contents/Plugins/obs-outputs.so
+install_name_tool -change libmbedcrypto.3.dylib @executable_path/../Frameworks/libmbedcrypto.3.dylib ./OBS.app/Contents/Plugins/obs-outputs.so
+install_name_tool -change libmbedx509.0.dylib @executable_path/../Frameworks/libmbedx509.0.dylib ./OBS.app/Contents/Plugins/obs-outputs.so
 install_name_tool -change /usr/local/opt/curl/lib/libcurl.4.dylib @executable_path/../Frameworks/libcurl.4.dylib ./OBS.app/Contents/Plugins/obs-outputs.so
 install_name_tool -change @rpath/libobs.0.dylib @executable_path/../Frameworks/libobs.0.dylib ./OBS.app/Contents/Plugins/obs-outputs.so
 install_name_tool -change /tmp/obsdeps/bin/libjansson.4.dylib @executable_path/../Frameworks/libjansson.4.dylib ./OBS.app/Contents/Plugins/obs-outputs.so
 
 # copy sparkle into the app
-# you get this from https://github.com/sparkle-project/Sparkle/releases
-# and you make a sparkle folder as a sibling of your repo, and copy the
-# Sparkle.framework in that folder.
 hr "Copying Sparkle.framework"
 cp -R ../../sparkle/Sparkle.framework ./OBS.app/Contents/Frameworks/
 install_name_tool -change @rpath/Sparkle.framework/Versions/A/Sparkle @executable_path/../Frameworks/Sparkle.framework/Versions/A/Sparkle ./OBS.app/Contents/MacOS/obs
 
 # Copy Chromium embedded framework to app Frameworks directory
 hr "Copying Chromium Embedded Framework.framework"
-81.3.1+gb2b49f1+chromium-81.0.4044.113
 sudo mkdir -p OBS.app/Contents/Frameworks
-#- sudo cp -R ../../cef_binary_${CEF_BUILD_VERSION}_macosx64/Release/Chromium\ Embedded\ Framework.framework OBS.app/Contents/Frameworks/
-sudo cp -R ../../cef_binary_81.3.1+gb2b49f1+chromium-81.0.4044.113_macosx64/Release/Chromium\ Embedded\ Framework.framework OBS.app/Contents/Frameworks/
+sudo cp -R ../../cef_binary_${CEF_BUILD_VERSION}_macosx64/Release/Chromium\ Embedded\ Framework.framework OBS.app/Contents/Frameworks/
 
 #- install_name_tool -change /usr/local/opt/qt/lib/QtGui.framework/Versions/5/QtGui @executable_path/../Frameworks/QtGui.framework/Versions/5/QtGui ./OBS.app/Contents/Plugins/obs-browser.so
 #- install_name_tool -change /usr/local/opt/qt/lib/QtCore.framework/Versions/5/QtCore @executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore ./OBS.app/Contents/Plugins/obs-browser.so
