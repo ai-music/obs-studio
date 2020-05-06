@@ -126,6 +126,10 @@ void OBSBasic::OnHttpError(int step, QString url, QString curlError) {
 			  QString::number(step) + ".";
 	QMessageBox msgBox(QMessageBox::Warning, "AiMusic HTTP Error", message,
 			   QMessageBox::Ok);
+
+	if (step <= 3) {
+		setUiDisconnected();
+	}
 	msgBox.exec();
 } 
 
