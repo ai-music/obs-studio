@@ -59,6 +59,76 @@ void OBSBasic::aiMusicSetupUI() {
 	connect(&aiMusicRoom, SIGNAL(signal_failed_Step5_deleteRoom(QString)),
 		this, SLOT(onFailed_Step5_deleteRoom(QString)));
 
+	// File Menu
+	auto menuFile = ui->menu_File;
+	auto actionShowRecordings = ui->actionShow_Recordings;
+	auto actionRemux = ui->actionRemux;
+	auto actionSettings = ui->action_Settings;
+	auto actionShowSettingsFolder = ui->actionShowSettingsFolder;
+	auto actionShowProfileFolder = ui->actionShowProfileFolder;
+	auto actionAlwaysOnTop = ui->actionAlwaysOnTop;
+	auto actionExit = ui->actionE_xit;
+	actionShowRecordings->setVisible(false);
+	actionRemux->setVisible(false);
+	actionSettings->setVisible(false);
+	actionShowSettingsFolder->setVisible(false);
+	actionShowProfileFolder->setVisible(false);
+
+	// Edit Menu
+	auto menuEdit = ui->menuBasic_MainMenu_Edit;
+	auto actionCopySource = ui->actionCopySource;
+	auto actionPasteRef = ui->actionPasteRef;
+	auto actionPasteDup = ui->actionPasteDup;
+	auto actionCopyFilters = ui->actionCopyFilters;
+	auto actionPasteFilters = ui->actionPasteFilters;
+
+	menuEdit->menuAction()->setVisible(false);
+
+	// View Menu
+	auto menuView = ui->viewMenu;
+	auto actionFullScreenInterface = ui->actionFullscreenInterface;
+	auto menuViewMenuDosk = ui->viewMenuDocks;
+	auto menuViewMenuToolbats = ui->viewMenuToolbars;
+	auto actionToggleSourceIcons = ui->toggleSourceIcons;
+	auto actionToggleStatusBar = ui->toggleStatusBar;
+	auto actionStats = ui->stats;
+
+	menuView->menuAction()->setVisible(false);
+	actionFullScreenInterface->setVisible(false);
+	menuViewMenuDosk->menuAction()->setVisible(false);
+	menuViewMenuToolbats->menuAction()->setVisible(false);
+	actionToggleSourceIcons->setVisible(false);
+	actionToggleStatusBar->setVisible(false);
+	actionStats->setVisible(false);
+
+	// Profile Menu
+	auto menuProfile = ui->profileMenu;
+	menuProfile->menuAction()->setVisible(false);
+
+	// Scene Menu
+	auto menuScene = ui->sceneCollectionMenu;
+	menuScene->menuAction()->setVisible(false);
+
+	// Tools Menu
+	auto menuTools = ui->menuTools;
+	menuTools->menuAction()->setVisible(false);
+
+	// Help Menu
+	auto menuHelp = ui->menuBasic_MainMenu_Help;
+	auto actionHelpPortal = ui->actionHelpPortal;
+	auto actionWebsite = ui->actionWebsite;
+	auto actionDiscord = ui->actionDiscord;
+	auto menuLogFiles = ui->menuLogFiles;
+	auto menuCrashLogs = ui->menuCrashLogs;
+	auto actionCheckForUpdates = ui->actionCheckForUpdates;
+	auto actionShowAbout = ui->actionShowAbout;
+	actionHelpPortal->setVisible(false);
+	actionWebsite->setVisible(false);
+	actionDiscord->setVisible(false);
+	menuLogFiles->menuAction()->setVisible(false);
+	menuCrashLogs->menuAction()->setVisible(false);
+	actionCheckForUpdates->setVisible(false);
+
 	setUiDisconnected();
 
 	//#ifndef _DEBUG

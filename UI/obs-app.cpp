@@ -35,6 +35,8 @@
 #include <QProxyStyle>
 #include <QScreen>
 #include <QProcess>
+#include <QMouseEvent>
+#include <QKeyEvent>
 
 #include "qt-wrappers.hpp"
 #include "obs-app.hpp"
@@ -1103,9 +1105,9 @@ bool OBSApp::InitTheme()
 OBSApp::OBSApp(int &argc, char **argv, profiler_name_store_t *store)
 	: QApplication(argc, argv), profilerNameStore(store)
 {
-	sleepInhibitor = os_inhibit_sleep_create("OBS Video/audio");
+	sleepInhibitor = os_inhibit_sleep_create("OSSIA LIVE Video/audio");
 
-	setWindowIcon(QIcon::fromTheme("obs", QIcon(":/res/images/obs.png")));
+	setWindowIcon(QIcon::fromTheme("obs", QIcon(":/res/images/OSSIACircle.png")));
 }
 
 OBSApp::~OBSApp()
@@ -1919,7 +1921,7 @@ static void main_crash_handler(const char *format, va_list args, void *param)
 	file << text;
 	file.close();
 
-	int ret = MessageBoxA(NULL, CRASH_MESSAGE, "OBS has crashed!",
+	int ret = MessageBoxA(NULL, CRASH_MESSAGE, "OSSIA LIVE has crashed!",
 			      MB_YESNO | MB_ICONERROR | MB_TASKMODAL);
 
 	if (ret == IDYES) {
@@ -2448,7 +2450,7 @@ int main(int argc, char *argv[])
 			exit(0);
 
 		} else if (arg_is(argv[i], "--version", "-V")) {
-			std::cout << "OBS Studio - "
+			std::cout << "OSSIA LIVE - "
 				  << App()->GetVersionString() << "\n";
 			exit(0);
 		}

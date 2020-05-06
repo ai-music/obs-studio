@@ -43,6 +43,9 @@
 	<file>images/4.png</file>
     <file>images/5.png</file>
     <file>images/6.png</file>
+	<file>images/OSSIACircle.png</file>
+	<file>images/OssiLiveVertical.png</file>
+	<file>images/OssiaLiveHorizontal.png</file>
 	<file>files/Ossia_Live_Scene_default.json</file>
   </qresource>
   <qresource prefix="/settings">

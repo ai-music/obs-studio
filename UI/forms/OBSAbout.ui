@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>840</width>
-    <height>519</height>
+    <height>498</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -61,7 +61,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>:res/images/obs.png</pixmap>
+        <pixmap>:res/images/OSSIACircle.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -76,7 +76,7 @@
        <item>
         <widget class="QLabel" name="name">
          <property name="text">
-          <string notr="true">OBS Studio</string>
+          <string notr="true">OSSIA LIVE</string>
          </property>
         </widget>
        </item>
@@ -84,40 +84,6 @@
         <widget class="QLabel" name="version">
          <property name="text">
           <string notr="true">Version</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="info">
-         <property name="text">
-          <string>About.Info</string>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="contribute">
-         <property name="text">
-          <string notr="true">Contribute</string>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="donate">
-         <property name="text">
-          <string notr="true">Donate</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="getInvolved">
-         <property name="text">
-          <string notr="true">Get Involved</string>
          </property>
         </widget>
        </item>
@@ -172,48 +138,11 @@
       <property name="bottomMargin">
        <number>0</number>
       </property>
-      <item>
-       <widget class="ClickableLabel" name="about">
-        <property name="text">
-         <string>About</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="ClickableLabel" name="authors">
-        <property name="text">
-         <string>Authors</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="ClickableLabel" name="license">
-        <property name="text">
-         <string>License</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
      </layout>
     </widget>
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>ClickableLabel</class>
-   <extends>QLabel</extends>
-   <header>clickable-label.hpp</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

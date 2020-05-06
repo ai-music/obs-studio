@@ -5321,7 +5321,7 @@ inline void OBSBasic::OnDeactivate()
 
 		if (trayIcon)
 			trayIcon->setIcon(QIcon::fromTheme(
-				"obs-tray", QIcon(":/res/images/obs.png")));
+				"obs-tray", QIcon(":/res/images/OSSIACircle.png")));
 	} else if (trayIcon) {
 		if (os_atomic_load_bool(&recording_paused))
 			trayIcon->setIcon(QIcon(":/res/images/obs_paused.png"));
@@ -7144,7 +7144,7 @@ void OBSBasic::ToggleShowHide()
 void OBSBasic::SystemTrayInit()
 {
 	trayIcon.reset(new QSystemTrayIcon(
-		QIcon::fromTheme("obs-tray", QIcon(":/res/images/obs.png")),
+		QIcon::fromTheme("obs-tray", QIcon(":/res/images/OSSIACircle.png")),
 		this));
 	trayIcon->setToolTip("OBS Studio");
 

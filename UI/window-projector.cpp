@@ -24,7 +24,7 @@ OBSProjector::OBSProjector(QWidget *widget, obs_source_t *source_, int monitor,
 {
 	type = type_;
 
-	setWindowIcon(QIcon::fromTheme("obs", QIcon(":/res/images/obs.png")));
+	setWindowIcon(QIcon::fromTheme("obs", QIcon(":/res/images/OSSIACircle.png")));
 
 	if (monitor == -1)
 		resize(480, 270);
