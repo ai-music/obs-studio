@@ -38,44 +38,45 @@ fi
 ../CI/install/osx/packageApp.sh
 
 # fix obs outputs plugin it doesn't play nicely with dylibBundler at the moment
-cp /usr/local/opt/mbedtls/lib/libmbedtls.12.dylib ./OBS.app/Contents/Frameworks/
-cp /usr/local/opt/mbedtls/lib/libmbedcrypto.3.dylib ./OBS.app/Contents/Frameworks/
-cp /usr/local/opt/mbedtls/lib/libmbedx509.0.dylib ./OBS.app/Contents/Frameworks/
-chmod +w ./OBS.app/Contents/Frameworks/*.dylib
-install_name_tool -id @executable_path/../Frameworks/libmbedtls.12.dylib ./OBS.app/Contents/Frameworks/libmbedtls.12.dylib
-install_name_tool -id @executable_path/../Frameworks/libmbedcrypto.3.dylib ./OBS.app/Contents/Frameworks/libmbedcrypto.3.dylib
-install_name_tool -id @executable_path/../Frameworks/libmbedx509.0.dylib ./OBS.app/Contents/Frameworks/libmbedx509.0.dylib
-install_name_tool -change libmbedtls.12.dylib @executable_path/../Frameworks/libmbedtls.12.dylib ./OBS.app/Contents/Plugins/obs-outputs.so
-install_name_tool -change libmbedcrypto.3.dylib @executable_path/../Frameworks/libmbedcrypto.3.dylib ./OBS.app/Contents/Plugins/obs-outputs.so
-install_name_tool -change libmbedx509.0.dylib @executable_path/../Frameworks/libmbedx509.0.dylib ./OBS.app/Contents/Plugins/obs-outputs.so
-install_name_tool -change /usr/local/opt/curl/lib/libcurl.4.dylib @executable_path/../Frameworks/libcurl.4.dylib ./OBS.app/Contents/Plugins/obs-outputs.so
-install_name_tool -change @rpath/libobs.0.dylib @executable_path/../Frameworks/libobs.0.dylib ./OBS.app/Contents/Plugins/obs-outputs.so
-install_name_tool -change /tmp/obsdeps/bin/libjansson.4.dylib @executable_path/../Frameworks/libjansson.4.dylib ./OBS.app/Contents/Plugins/obs-outputs.so
+cp /usr/local/opt/mbedtls/lib/libmbedtls.12.dylib ./OSSIALIVE.app/Contents/Frameworks/
+cp /usr/local/opt/mbedtls/lib/libmbedcrypto.3.dylib ./OSSIALIVE.app/Contents/Frameworks/
+cp /usr/local/opt/mbedtls/lib/libmbedx509.0.dylib ./OSSIALIVE.app/Contents/Frameworks/
+chmod +w ./OSSIALIVE.app/Contents/Frameworks/*.dylib
+install_name_tool -id @executable_path/../Frameworks/libmbedtls.12.dylib ./OSSIALIVE.app/Contents/Frameworks/libmbedtls.12.dylib
+install_name_tool -id @executable_path/../Frameworks/libmbedcrypto.3.dylib ./OSSIALIVE.app/Contents/Frameworks/libmbedcrypto.3.dylib
+install_name_tool -id @executable_path/../Frameworks/libmbedx509.0.dylib ./OSSIALIVE.app/Contents/Frameworks/libmbedx509.0.dylib
+install_name_tool -change libmbedtls.12.dylib @executable_path/../Frameworks/libmbedtls.12.dylib ./OSSIALIVE.app/Contents/Plugins/obs-outputs.so
+install_name_tool -change libmbedcrypto.3.dylib @executable_path/../Frameworks/libmbedcrypto.3.dylib ./OSSIALIVE.app/Contents/Plugins/obs-outputs.so
+install_name_tool -change libmbedx509.0.dylib @executable_path/../Frameworks/libmbedx509.0.dylib ./OSSIALIVE.app/Contents/Plugins/obs-outputs.so
+install_name_tool -change /usr/local/opt/curl/lib/libcurl.4.dylib @executable_path/../Frameworks/libcurl.4.dylib ./OSSIALIVE.app/Contents/Plugins/obs-outputs.so
+install_name_tool -change @rpath/libobs.0.dylib @executable_path/../Frameworks/libobs.0.dylib ./OSSIALIVE.app/Contents/Plugins/obs-outputs.so
+install_name_tool -change /tmp/obsdeps/bin/libjansson.4.dylib @executable_path/../Frameworks/libjansson.4.dylib ./OSSIALIVE.app/Contents/Plugins/obs-outputs.so
 
 # copy sparkle into the app
 hr "Copying Sparkle.framework"
-cp -R ../../sparkle/Sparkle.framework ./OBS.app/Contents/Frameworks/
-install_name_tool -change @rpath/Sparkle.framework/Versions/A/Sparkle @executable_path/../Frameworks/Sparkle.framework/Versions/A/Sparkle ./OBS.app/Contents/MacOS/obs
+cp -R ../../sparkle/Sparkle.framework ./OSSIALIVE.app/Contents/Frameworks/
+install_name_tool -change @rpath/Sparkle.framework/Versions/A/Sparkle @executable_path/../Frameworks/Sparkle.framework/Versions/A/Sparkle ./OSSIALIVE.app/Contents/MacOS/OSSIALIVE
 
 # Copy Chromium embedded framework to app Frameworks directory
 hr "Copying Chromium Embedded Framework.framework"
-sudo mkdir -p OBS.app/Contents/Frameworks
-sudo cp -R ../../cef_binary_${CEF_BUILD_VERSION}_macosx64/Release/Chromium\ Embedded\ Framework.framework OBS.app/Contents/Frameworks/
+sudo mkdir -p OSSIALIVE.app/Contents/Frameworks
+sudo cp -R ../../cef_binary_${CEF_BUILD_VERSION}_macosx64/Release/Chromium\ Embedded\ Framework.framework OSSIALIVE.app/Contents/Frameworks/
 
-#- install_name_tool -change /usr/local/opt/qt/lib/QtGui.framework/Versions/5/QtGui @executable_path/../Frameworks/QtGui.framework/Versions/5/QtGui ./OBS.app/Contents/Plugins/obs-browser.so
-#- install_name_tool -change /usr/local/opt/qt/lib/QtCore.framework/Versions/5/QtCore @executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore ./OBS.app/Contents/Plugins/obs-browser.so
-#- install_name_tool -change /usr/local/opt/qt/lib/QtWidgets.framework/Versions/5/QtWidgets @executable_path/../Frameworks/QtWidgets.framework/Versions/5/QtWidgets ./OBS.app/Contents/Plugins/obs-browser.so
+#- install_name_tool -change /usr/local/opt/qt/lib/QtGui.framework/Versions/5/QtGui @executable_path/../Frameworks/QtGui.framework/Versions/5/QtGui ./OSSIALIVE.app/Contents/Plugins/obs-browser.so
+#- install_name_tool -change /usr/local/opt/qt/lib/QtCore.framework/Versions/5/QtCore @executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore ./OSSIALIVE.app/Contents/Plugins/obs-browser.so
+#- install_name_tool -change /usr/local/opt/qt/lib/QtWidgets.framework/Versions/5/QtWidgets @executable_path/../Frameworks/QtWidgets.framework/Versions/5/QtWidgets ./OSSIALIVE.app/Contents/Plugins/obs-browser.so
 
-cp ../CI/install/osx/OBSPublicDSAKey.pem OBS.app/Contents/Resources
+cp ../CI/install/osx/OBSPublicDSAKey.pem OSSIALIVE.app/Contents/Resources
 
 # edit plist
-plutil -insert CFBundleVersion -string $GIT_TAG ./OBS.app/Contents/Info.plist
-plutil -insert CFBundleShortVersionString -string $GIT_TAG ./OBS.app/Contents/Info.plist
-plutil -insert OBSFeedsURL -string https://obsproject.com/osx_update/feeds.xml ./OBS.app/Contents/Info.plist
-plutil -insert SUFeedURL -string https://obsproject.com/osx_update/stable/updates.xml ./OBS.app/Contents/Info.plist
-plutil -insert SUPublicDSAKeyFile -string OBSPublicDSAKey.pem ./OBS.app/Contents/Info.plist
+plutil -insert CFBundleVersion -string $GIT_TAG ./OSSIALIVE.app/Contents/Info.plist
+plutil -insert CFBundleShortVersionString -string $GIT_TAG ./OSSIALIVE.app/Contents/Info.plist
+plutil -insert OBSFeedsURL -string https://obsproject.com/osx_update/feeds.xml ./OSSIALIVE.app/Contents/Info.plist
+plutil -insert SUFeedURL -string https://obsproject.com/osx_update/stable/updates.xml ./OSSIALIVE.app/Contents/Info.plist
+plutil -insert SUPublicDSAKeyFile -string OBSPublicDSAKey.pem ./OSSIALIVE.app/Contents/Info.plist
 
-dmgbuild -s ../CI/install/osx/settings.json "OBS" obs.dmg
+echo "dmgbuild -s ../CI/install/osx/settings.json "OSSIA" OSSIALIVE.dmg"
+dmgbuild -s ../CI/install/osx/settings.json "OSSIA" OSSIALIVE.dmg
 
 if [ -v "$TRAVIS" ]; then
 	# Signing stuff
@@ -92,7 +93,7 @@ if [ -v "$TRAVIS" ]; then
 	security set-key-partition-list -S apple-tool:,apple: -s -k mysecretpassword build.keychain
 fi
 
-cp ./OBS.dmg ./$FILENAME
+cp ./OSSIALIVE.dmg ./$FILENAME
 
 # Move to the folder that travis uses to upload artifacts from
 hr "Moving package to nightly folder for distribution"
