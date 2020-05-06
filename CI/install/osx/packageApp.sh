@@ -28,8 +28,6 @@ cp ../CI/install/osx/Info.plist ./OBS.app/Contents
 -x ./OBS.app/Contents/PlugIns/mac-decklink.so \
 -x ./OBS.app/Contents/PlugIns/mac-syphon.so \
 -x ./OBS.app/Contents/PlugIns/mac-vth264.so \
--x ./OBS.app/Contents/PlugIns/obs-browser.so \
--x ./OBS.app/Contents/PlugIns/obs-browser-page \
 -x ./OBS.app/Contents/PlugIns/obs-ffmpeg.so \
 -x ./OBS.app/Contents/PlugIns/obs-filters.so \
 -x ./OBS.app/Contents/PlugIns/obs-transitions.so \
@@ -37,12 +35,14 @@ cp ../CI/install/osx/Info.plist ./OBS.app/Contents
 -x ./OBS.app/Contents/PlugIns/rtmp-services.so \
 -x ./OBS.app/Contents/MacOS/obs \
 -x ./OBS.app/Contents/MacOS/obs-ffmpeg-mux \
--x ./OBS.app/Contents/MacOS/obslua.so \
--x ./OBS.app/Contents/MacOS/_obspython.so \
 -x ./OBS.app/Contents/PlugIns/obs-x264.so \
 -x ./OBS.app/Contents/PlugIns/text-freetype2.so \
 -x ./OBS.app/Contents/PlugIns/obs-libfdk.so
 # -x ./OBS.app/Contents/PlugIns/obs-outputs.so \
+#- -x ./OBS.app/Contents/PlugIns/obs-browser.so \
+#- -x ./OBS.app/Contents/PlugIns/obs-browser-page \
+#- -x ./OBS.app/Contents/MacOS/obslua.so \
+#- -x ./OBS.app/Contents/MacOS/_obspython.so \
 
 /usr/local/Cellar/qt/5.14.1/bin/macdeployqt ./OBS.app
 
