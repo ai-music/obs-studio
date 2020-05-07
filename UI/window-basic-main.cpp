@@ -408,12 +408,6 @@ OBSBasic::OBSBasic(QWidget *parent)
 		SLOT(ScenesReordered(const QModelIndex &, int, int,
 				     const QModelIndex &, int)));
 
-	// Crude, I know...
-	connect(ui->btnConnect, SIGNAL(clicked()), this,
-		SLOT(DoConnectToAiMusic()));
-	connect(ui->btnDisconnect, SIGNAL(clicked()), this,
-		SLOT(DoDisconnectFromAiMusic()));
-
 	aiMusicSetupUI();
 }
 

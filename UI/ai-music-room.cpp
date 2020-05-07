@@ -17,13 +17,22 @@ const QString stateDeleted = "DELETED";
 const QString statePending = "PENDING";
 const QString stateActive = "ACTIVE";
 
+const int maxMusicStyle = 6;
+const int defaultMusicStyle = 4;
+const QString AiMusicRoom::musicStyles[maxMusicStyle] = {
+	"Jazz",    "Ambient",       "House", "Pop",
+	"Hip_Hop", "Rock"};
+
+//	"Commerical House",    "Pop",       "Grime Slammers",
+//	"Warm Up", "Uplifting Warm Down", "Power Play"};
+
 AiMusicRoom *AiMusicRoom::theInstance = nullptr;
 
 AiMusicRoom::AiMusicRoom()
 	: QObject(),
 	  permission(-1),
 	  inFlightRequest(NoRequest),
-	  musicStyle("AMBIENT"),
+	  musicStyle(getDefaultMusicStyle()),
 	  state(stateDeleted)
 {
 	theInstance = this;
@@ -32,6 +41,19 @@ AiMusicRoom::AiMusicRoom()
 AiMusicRoom::~AiMusicRoom()
 {
 	preDelete();	// Called here, just in case.
+}
+
+const QString &AiMusicRoom::getMusicStyle(int id)
+{
+	if (id < 0 || id >= maxMusicStyle) {
+		return getDefaultMusicStyle();
+	}
+	return musicStyles[id];
+}
+
+const QString &AiMusicRoom::getDefaultMusicStyle()
+{
+	return musicStyles[defaultMusicStyle];
 }
 
 void AiMusicRoom::preDelete() {
@@ -175,7 +197,7 @@ void AiMusicRoom::doStep4_updateRoomChangeStyle(const QString& style) {
 	json["createdAt"] = createdAt;
 	json["streamUri"] = streamUri;
 	json["ownerId"] = ownerId;
-	QJsonArray styleArray = { style.toUpper() };
+	QJsonArray styleArray = {style.toUpper()};
 	json["musicStyle"] = styleArray;
 	QJsonDocument doc(json);
 	const QString content = doc.toJson(QJsonDocument::Compact);

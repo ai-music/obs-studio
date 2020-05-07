@@ -14,13 +14,101 @@ void OBSBasic::aiMusicSetupUI() {
 	ui->btnConnect->setMinimumWidth(minBtnWidth);
 	ui->btnDisconnect->setMinimumWidth(minBtnWidth);
 
-	setupBtn(ui->btnGenre1, "ROCK", ":res/images/1.png");
-	setupBtn(ui->btnGenre2, "HIP_HOP", ":res/images/2.png");
-	setupBtn(ui->btnGenre3, "JAZZ", ":res/images/6.png");
+	setupBtn(ui->btnGenre1, AiMusicRoom::getMusicStyle(0), ":res/images/1.png");
+	setupBtn(ui->btnGenre2, AiMusicRoom::getMusicStyle(1),
+		 ":res/images/2.png");
+	setupBtn(ui->btnGenre3, AiMusicRoom::getMusicStyle(2),
+		 ":res/images/3.png");
 
-	setupBtn(ui->btnGenre4, "POP", ":res/images/4.png");
-	setupBtn(ui->btnGenre5, "HOUSE", ":res/images/5.png");
-	setupBtn(ui->btnGenre6, "AMBIENT", ":res/images/3.png");
+	setupBtn(ui->btnGenre4, AiMusicRoom::getMusicStyle(3),
+		 ":res/images/4.png");
+	setupBtn(ui->btnGenre5, AiMusicRoom::getMusicStyle(4),
+		 ":res/images/5.png");
+	setupBtn(ui->btnGenre6, AiMusicRoom::getMusicStyle(5),
+		 ":res/images/6.png");
+
+	// File Menu
+	//auto menuFile = ui->menu_File;
+	auto actionShowRecordings = ui->actionShow_Recordings;
+	auto actionRemux = ui->actionRemux;
+	auto actionSettings = ui->action_Settings;
+	auto actionShowSettingsFolder = ui->actionShowSettingsFolder;
+	auto actionShowProfileFolder = ui->actionShowProfileFolder;
+	auto actionAlwaysOnTop = ui->actionAlwaysOnTop;
+	//auto actionExit = ui->actionE_xit;
+	actionShowRecordings->setVisible(false);
+	actionRemux->setVisible(false);
+	actionSettings->setVisible(false);
+	actionShowSettingsFolder->setVisible(false);
+	actionShowProfileFolder->setVisible(false);
+	actionAlwaysOnTop->setVisible(false);
+	//auto actionConnect = menuFile->addAction("Connect");
+	//auto actionDisconnect = menuFile->addAction("Disconnect");
+
+	// Edit Menu
+	auto menuEdit = ui->menuBasic_MainMenu_Edit;
+	//auto actionCopySource = ui->actionCopySource;
+	//auto actionPasteRef = ui->actionPasteRef;
+	//auto actionPasteDup = ui->actionPasteDup;
+	//auto actionCopyFilters = ui->actionCopyFilters;
+	//auto actionPasteFilters = ui->actionPasteFilters;
+
+	menuEdit->menuAction()->setVisible(false);
+
+	// View Menu
+	auto menuView = ui->viewMenu;
+	auto actionFullScreenInterface = ui->actionFullscreenInterface;
+	auto menuViewMenuDosk = ui->viewMenuDocks;
+	auto menuViewMenuToolbats = ui->viewMenuToolbars;
+	auto actionToggleSourceIcons = ui->toggleSourceIcons;
+	auto actionToggleStatusBar = ui->toggleStatusBar;
+	auto actionStats = ui->stats;
+
+	menuView->menuAction()->setVisible(false);
+	actionFullScreenInterface->setVisible(false);
+	menuViewMenuDosk->menuAction()->setVisible(false);
+	menuViewMenuToolbats->menuAction()->setVisible(false);
+	actionToggleSourceIcons->setVisible(false);
+	actionToggleStatusBar->setVisible(false);
+	actionStats->setVisible(false);
+
+	// Profile Menu
+	auto menuProfile = ui->profileMenu;
+	menuProfile->menuAction()->setVisible(false);
+
+	// Scene Menu
+	auto menuScene = ui->sceneCollectionMenu;
+	menuScene->menuAction()->setVisible(false);
+
+	// Tools Menu
+	auto menuTools = ui->menuTools;
+	menuTools->menuAction()->setVisible(false);
+
+	// Help Menu
+	//auto menuHelp = ui->menuBasic_MainMenu_Help;
+	auto actionHelpPortal = ui->actionHelpPortal;
+	auto actionWebsite = ui->actionWebsite;
+	auto actionDiscord = ui->actionDiscord;
+	auto menuLogFiles = ui->menuLogFiles;
+	auto menuCrashLogs = ui->menuCrashLogs;
+	auto actionCheckForUpdates = ui->actionCheckForUpdates;
+	//auto actionShowAbout = ui->actionShowAbout;
+	actionHelpPortal->setVisible(false);
+	actionWebsite->setVisible(false);
+	actionDiscord->setVisible(false);
+	menuLogFiles->menuAction()->setVisible(false);
+	menuCrashLogs->menuAction()->setVisible(false);
+	actionCheckForUpdates->setVisible(false);
+
+	connect(ui->btnConnect, SIGNAL(clicked()), this,
+		SLOT(DoConnectToAiMusic()));
+	connect(ui->btnDisconnect, SIGNAL(clicked()), this,
+		SLOT(DoDisconnectFromAiMusic()));
+
+	//connect(actionConnect, SIGNAL(triggered()), this,
+	//	SLOT(DoConnectToAiMusic()));
+	//connect(actionDisconnect, SIGNAL(triggered()), this,
+	//	SLOT(DoDisconnectFromAiMusic()));
 
 	connect(ui->btnGenre1, SIGNAL(clicked()), this, SLOT(DoGenre1()));
 	connect(ui->btnGenre2, SIGNAL(clicked()), this, SLOT(DoGenre2()));
@@ -59,75 +147,6 @@ void OBSBasic::aiMusicSetupUI() {
 	connect(&aiMusicRoom, SIGNAL(signal_failed_Step5_deleteRoom(QString)),
 		this, SLOT(onFailed_Step5_deleteRoom(QString)));
 
-	// File Menu
-	auto menuFile = ui->menu_File;
-	auto actionShowRecordings = ui->actionShow_Recordings;
-	auto actionRemux = ui->actionRemux;
-	auto actionSettings = ui->action_Settings;
-	auto actionShowSettingsFolder = ui->actionShowSettingsFolder;
-	auto actionShowProfileFolder = ui->actionShowProfileFolder;
-	auto actionAlwaysOnTop = ui->actionAlwaysOnTop;
-	auto actionExit = ui->actionE_xit;
-	actionShowRecordings->setVisible(false);
-	actionRemux->setVisible(false);
-	actionSettings->setVisible(false);
-	actionShowSettingsFolder->setVisible(false);
-	actionShowProfileFolder->setVisible(false);
-
-	// Edit Menu
-	auto menuEdit = ui->menuBasic_MainMenu_Edit;
-	auto actionCopySource = ui->actionCopySource;
-	auto actionPasteRef = ui->actionPasteRef;
-	auto actionPasteDup = ui->actionPasteDup;
-	auto actionCopyFilters = ui->actionCopyFilters;
-	auto actionPasteFilters = ui->actionPasteFilters;
-
-	menuEdit->menuAction()->setVisible(false);
-
-	// View Menu
-	auto menuView = ui->viewMenu;
-	auto actionFullScreenInterface = ui->actionFullscreenInterface;
-	auto menuViewMenuDosk = ui->viewMenuDocks;
-	auto menuViewMenuToolbats = ui->viewMenuToolbars;
-	auto actionToggleSourceIcons = ui->toggleSourceIcons;
-	auto actionToggleStatusBar = ui->toggleStatusBar;
-	auto actionStats = ui->stats;
-
-	menuView->menuAction()->setVisible(false);
-	actionFullScreenInterface->setVisible(false);
-	menuViewMenuDosk->menuAction()->setVisible(false);
-	menuViewMenuToolbats->menuAction()->setVisible(false);
-	actionToggleSourceIcons->setVisible(false);
-	actionToggleStatusBar->setVisible(false);
-	actionStats->setVisible(false);
-
-	// Profile Menu
-	auto menuProfile = ui->profileMenu;
-	menuProfile->menuAction()->setVisible(false);
-
-	// Scene Menu
-	auto menuScene = ui->sceneCollectionMenu;
-	menuScene->menuAction()->setVisible(false);
-
-	// Tools Menu
-	auto menuTools = ui->menuTools;
-	menuTools->menuAction()->setVisible(false);
-
-	// Help Menu
-	auto menuHelp = ui->menuBasic_MainMenu_Help;
-	auto actionHelpPortal = ui->actionHelpPortal;
-	auto actionWebsite = ui->actionWebsite;
-	auto actionDiscord = ui->actionDiscord;
-	auto menuLogFiles = ui->menuLogFiles;
-	auto menuCrashLogs = ui->menuCrashLogs;
-	auto actionCheckForUpdates = ui->actionCheckForUpdates;
-	auto actionShowAbout = ui->actionShowAbout;
-	actionHelpPortal->setVisible(false);
-	actionWebsite->setVisible(false);
-	actionDiscord->setVisible(false);
-	menuLogFiles->menuAction()->setVisible(false);
-	menuCrashLogs->menuAction()->setVisible(false);
-	actionCheckForUpdates->setVisible(false);
 
 	setUiDisconnected();
 
@@ -240,7 +259,7 @@ void OBSBasic::onFailed_Step5_deleteRoom(QString data)
 	QMessageBox msgBox(QMessageBox::Warning, "Failed to delete room.", data,
 			   QMessageBox::Ok);
 	msgBox.exec();
-	setUiConnected();
+	// setUiConnected(); - can't do this - we may be deleting the room on the way out.
 }
 
 void OBSBasic::OnGotRoom(QString roomId, QString musicStyle, QString streamUri) {
@@ -341,7 +360,7 @@ void OBSBasic::setUiForMusicStyle(const QString &musicStyle) {
 }
 
 void OBSBasic::highlightButton(QPushButton *btn, const QString &musicStyle) {
-	if( btn->toolTip() == musicStyle ){
+	if( btn->toolTip().toUpper() == musicStyle.toUpper() ){
 		btn->setStyleSheet("background-color:LightGray;");
 	} else {
 		btn->setStyleSheet("background-color:Gray;");
@@ -351,26 +370,39 @@ void OBSBasic::highlightButton(QPushButton *btn, const QString &musicStyle) {
 void OBSBasic::setupBtn(QPushButton *btn, const QString &musicStyle, const QString imgUrl)
 {
 	btn->setToolTip(musicStyle);
+
+	QPixmap pixmap(imgUrl);
+	auto buttonWidth = pixmap.width();
+	auto buttonHeight = pixmap.height();
+	btn->resize(buttonWidth, buttonHeight);
+
 	btn->setMinimumWidth(minBtnWidth);
 	btn->setMinimumHeight(minBtnHeight);
 	btn->setStyleSheet("background-color:Gray;");
 
-	QFont font("Arial", minBtnHeight / 5);
+	QFont font("Arial", buttonWidth / 8);
 	font.setBold(true);
 	QFontMetrics fontMetrics(font);
 	const int fontWidth = fontMetrics.horizontalAdvance(musicStyle);
 	const int fontHeight = fontMetrics.capHeight();
 
-	QPixmap pixmap(imgUrl);
 	QPainter painter(&pixmap);
 
 	painter.setFont(font);
 	painter.setPen(QColor(200, 100, 0));
 
+	const int margin = (buttonWidth / 20);
 	QString btnText(musicStyle);
 	btnText.replace('_', ' ');
-	painter.drawText(QPoint(10,
-			10+fontHeight), btnText);
+	QStringList btnTexts = btnText.split(' ');
+	auto xPos = margin;
+	auto yPos = margin + fontHeight;
+	for (const auto &text : btnTexts) {
+		painter.drawText(QPoint(xPos, yPos), text);
+		yPos += fontHeight + margin;
+	}
+
+	
 
 	QIcon ButtonIcon(pixmap);
 	btn->setIcon(ButtonIcon);

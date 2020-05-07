@@ -22,6 +22,10 @@ public:
 	bool doChangeMusicStyle(const QString &musicStyle);
 
 	QString getStreamUrl() { return streamUri; }
+
+	static const QString& getMusicStyle(int id);
+	static const QString& getDefaultMusicStyle();
+
 signals:
 	void signalGotRoom(QString roomId, QString style,
 		 QString streamUri);
@@ -61,6 +65,8 @@ private:
 	QStringList curlErrors;
 	QString streamUri;
 	QString musicStyle;
+
+	static const QString musicStyles[];
 
 	static size_t staticStringWrite(char *ptr, size_t size, size_t nmemb,
 					std::string &str);
