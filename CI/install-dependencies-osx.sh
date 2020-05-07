@@ -1,7 +1,7 @@
 hr() {
-  echo "───────────────────────────────────────────────────"
-  echo $1
-  echo "───────────────────────────────────────────────────"
+	echo "───────────────────────────────────────────────────"
+	echo $1
+	echo "───────────────────────────────────────────────────"
 }
 
 # Exit if something fails
@@ -11,7 +11,7 @@ set -e
 set -v
 
 if [[ $TRAVIS ]]; then
-  git fetch --unshallow
+	git fetch --unshallow
 fi
 
 git fetch origin --tags
@@ -31,7 +31,7 @@ brew update
 brew install jack speexdsp ccache mbedtls freetype fdk-aac
 brew install https://gist.githubusercontent.com/DDRBoxman/9c7a2b08933166f4b61ed9a44b242609/raw/ef4de6c587c6bd7f50210eccd5bd51ff08e6de13/qt.rb
 if [ -d "$(brew --cellar)/swig" ]; then
-    brew unlink swig
+	brew unlink swig
 fi
 brew install https://gist.githubusercontent.com/DDRBoxman/4cada55c51803a2f963fa40ce55c9d3e/raw/572c67e908bfbc1bcb8c476ea77ea3935133f5b5/swig.rb
 
@@ -55,6 +55,8 @@ hr "Downloading Sparkle framework"
 wget --quiet --retry-connrefused --waitretry=1 -O sparkle.tar.bz2 https://github.com/sparkle-project/Sparkle/releases/download/1.23.0/Sparkle-1.23.0.tar.bz2
 mkdir -p ./sparkle
 tar -xf ./sparkle.tar.bz2 -C ./sparkle
+sudo rm -rf /Library/Frameworks/Sparkle.framework
+sudo chmod -R 777 /Library/Frameworks/Sparkle.framework
 sudo cp -R ./sparkle/Sparkle.framework /Library/Frameworks/Sparkle.framework
 
 # CEF Stuff
