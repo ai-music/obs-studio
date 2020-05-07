@@ -5,6 +5,7 @@
 
 #include <QLineEdit>
 #include <QHBoxLayout>
+#include <QKeyEvent>
 
 #include <json11.hpp>
 

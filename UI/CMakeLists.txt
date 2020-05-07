@@ -389,7 +389,7 @@ if(WIN32)
 
 	set_target_properties(obs
 		PROPERTIES
-			OUTPUT_NAME "obs${_output_suffix}")
+			OUTPUT_NAME "OSSIALIVE${_output_suffix}")
 endif()
 
 # See https://doc.qt.io/qt-5/qtwebengine-deploying.html
@@ -410,6 +410,7 @@ if (APPLE)
 	target_link_libraries(obs
 			Qt5::MacExtras)
 	set_target_properties(obs PROPERTIES LINK_FLAGS "-pagezero_size 10000 -image_base 100000000")
+	set_target_properties(obs PROPERTIES OUTPUT_NAME "OSSIALIVE")
 endif()
 
 define_graphic_modules(obs)
