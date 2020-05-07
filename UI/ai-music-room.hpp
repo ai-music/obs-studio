@@ -25,6 +25,7 @@ public:
 
 	static const QString& getMusicStyle(int id);
 	static const QString& getDefaultMusicStyle();
+	static QString getStreamNameFromMusicStyle(const QString &musicStyle);
 
 signals:
 	void signalGotRoom(QString roomId, QString style,

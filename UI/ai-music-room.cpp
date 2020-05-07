@@ -20,14 +20,17 @@ const QString stateActive = "ACTIVE";
 const int maxMusicStyle = 6;
 const int defaultMusicStyle = 4;
 const QString AiMusicRoom::musicStyles[maxMusicStyle] = {
-	"Jazz",    "Ambient",       "House", "Pop",
-	"Hip_Hop", "Rock"};
-
-//	"Commerical House",    "Pop",       "Grime Slammers",
-//	"Warm Up", "Uplifting Warm Down", "Power Play"};
+	"Commerical House", "Pop", "Grime Slammers",
+	"Warm Up", "Uplifting Warm Down", "Power Play"};
 
 AiMusicRoom *AiMusicRoom::theInstance = nullptr;
 
+QMap<QString, QString> styleStreamMap = {{"COMMERICAL HOUSE", "HOUSE"},
+					 {"POP", "POP"},
+					 {"GRIME SLAMMERS", "HIP_HOP"},
+					 {"WARM UP", "JAZZ"},
+					 {"UPLIFTING WARM DOWN", "AMBIENT"},
+					 {"POWER PLAY", "ROCK"}};
 AiMusicRoom::AiMusicRoom()
 	: QObject(),
 	  permission(-1),
@@ -54,6 +57,16 @@ const QString &AiMusicRoom::getMusicStyle(int id)
 const QString &AiMusicRoom::getDefaultMusicStyle()
 {
 	return musicStyles[defaultMusicStyle];
+}
+
+QString AiMusicRoom::getStreamNameFromMusicStyle(const QString &musicStyle)
+{
+	// Becasue the new music syle names aren't valid on
+	// the AI Music server
+	const QString idx = musicStyle.toUpper();
+	if (!styleStreamMap.contains(idx))
+		return idx;
+	return styleStreamMap.value(idx);
 }
 
 void AiMusicRoom::preDelete() {
@@ -97,7 +110,6 @@ bool AiMusicRoom::doChangeMusicStyle(const QString& musicStyle) {
 	doStep4_updateRoomChangeStyle(musicStyle);
 	return true;
 }
-
 
 void AiMusicRoom::doStep1_createApplication() {
 	//POST https : //urban-api.aimusic.services/applications
@@ -162,7 +174,8 @@ void AiMusicRoom::doStep3_createRoomStartPlayback(const QString &style)
 	const QString authorization = "Bearer " + activeApplicationToken;
 	const QString contentType = "application/json";
 	QJsonObject json;
-	QJsonArray styleArray = {style.toUpper()};
+	const QString streamName = getStreamNameFromMusicStyle(style);
+	QJsonArray styleArray = {streamName};
 	json["musicStyle"] = styleArray;
 	QJsonDocument doc(json);
 	const QString content = doc.toJson(QJsonDocument::Compact);
@@ -197,7 +210,8 @@ void AiMusicRoom::doStep4_updateRoomChangeStyle(const QString& style) {
 	json["createdAt"] = createdAt;
 	json["streamUri"] = streamUri;
 	json["ownerId"] = ownerId;
-	QJsonArray styleArray = {style.toUpper()};
+	const QString streamName = getStreamNameFromMusicStyle(style);
+	QJsonArray styleArray = {streamName};
 	json["musicStyle"] = styleArray;
 	QJsonDocument doc(json);
 	const QString content = doc.toJson(QJsonDocument::Compact);

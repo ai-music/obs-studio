@@ -262,21 +262,51 @@ void OBSBasic::onFailed_Step5_deleteRoom(QString data)
 	// setUiConnected(); - can't do this - we may be deleting the room on the way out.
 }
 
-void OBSBasic::OnGotRoom(QString roomId, QString musicStyle, QString streamUri) {
-	// Load in a correctly configured scene for the stream.
+void OBSBasic::OnGotRoom(QString roomId, QString musicStyle, QString streamUri)
+{
 
+	// --
+	const char *sceneCollection = config_get_string(
+		App()->GlobalConfig(), "Basic", "SceneCollectionFile");
+	char savePath[512];
+	char fileName[512];
+	int ret;
+
+	if (!sceneCollection)
+		throw "Failed to get scene collection name";
+
+	ret = snprintf(fileName, 512, "obs-studio/basic/scenes/%s.json",
+		       sceneCollection);
+	if (ret <= 0)
+		throw "Failed to create scene collection file name";
+
+	ret = GetConfigPath(savePath, sizeof(savePath), fileName);
+	if (ret <= 0)
+		throw "Failed to get scene collection json file path";
+
+	QString sceneFilePath(savePath);
+
+	// Try and replace the reference to the Ai-Music stream in the current file. If
+	// we can't find a reference to an Ai-Music stream, then load the default file.
 	char szSceneFolder[512];
-
 	if (GetConfigPath(szSceneFolder, sizeof(szSceneFolder),
 			  "obs-studio/basic/scenes") < 0) {
 		return;
 	}
-
 	const QString sceneFolder(szSceneFolder);
-	const QString newFilePath = aiMusicProfileWrangler.makeOssiaSceneFile(
-		sceneFolder, streamUri);
-	if (!newFilePath.isEmpty()) {
-		Load(newFilePath.toStdString().data());
+
+	sceneFilePath = aiMusicProfileWrangler.replaceAiMusicStream(
+		sceneFolder,sceneFilePath, streamUri);
+
+	if (sceneFilePath.isEmpty() || true ) {
+		// Load in a correctly configured scene for the stream.
+
+		sceneFilePath = aiMusicProfileWrangler.makeOssiaSceneFile(
+			sceneFolder, streamUri);
+	}
+
+	if (!sceneFilePath.isEmpty()) {
+		Load(sceneFilePath.toStdString().data());
 	}
 	setUiConnected();
 	setUiForMusicStyle(musicStyle);
@@ -290,7 +320,6 @@ void OBSBasic::OnDeletedRoom(QString,  QString, QString)
 {
 	setUiDisconnected();
 	
-
 	//QMessageBox msgBox(QMessageBox::Warning, "AiMusic HTTP Disconnected", "You are not disconnected from AiMusic.",
 	//		   QMessageBox::Ok);
 	//msgBox.exec();
@@ -360,11 +389,20 @@ void OBSBasic::setUiForMusicStyle(const QString &musicStyle) {
 }
 
 void OBSBasic::highlightButton(QPushButton *btn, const QString &musicStyle) {
-	if( btn->toolTip().toUpper() == musicStyle.toUpper() ){
+	auto toolTip = btn->toolTip().toUpper();
+	auto upperStyle = musicStyle.toUpper();
+
+	if (toolTip == upperStyle) {
 		btn->setStyleSheet("background-color:LightGray;");
-	} else {
-		btn->setStyleSheet("background-color:Gray;");
+		return;
 	}
+
+	if (AiMusicRoom::getStreamNameFromMusicStyle(toolTip) == upperStyle) {
+		btn->setStyleSheet("background-color:LightGray;");
+		return;
+	}
+
+	btn->setStyleSheet("background-color:Gray;");
 }
 
 void OBSBasic::setupBtn(QPushButton *btn, const QString &musicStyle, const QString imgUrl)
