@@ -14,10 +14,10 @@
     <ROW Property="ARPURLUPDATEINFO" Value="http://www.ossialive.com/"/>
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="AI Music"/>
-    <ROW Property="ProductCode" Value="2057:{CC7B7163-4C4F-4D24-911F-B862B61B5620} " Type="16"/>
+    <ROW Property="ProductCode" Value="2057:{15CB1D58-4F90-4AE3-AEAD-46E65544D2F6} " Type="16"/>
     <ROW Property="ProductLanguage" Value="2057"/>
     <ROW Property="ProductName" Value="OSSIA Live"/>
-    <ROW Property="ProductVersion" Value="0.04" Type="32"/>
+    <ROW Property="ProductVersion" Value="0.05" Type="32"/>
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{DABC1B78-CB82-47DE-AA20-FEC555E18194}"/>
@@ -36,12 +36,10 @@
     <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1"/>
     <ROW Directory="Acri_Dir" Directory_Parent="themes_Dir" DefaultDir="Acri"/>
     <ROW Directory="Dark_Dir" Directory_Parent="themes_Dir" DefaultDir="Dark"/>
-    <ROW Directory="DesktopFolder" Directory_Parent="TARGETDIR" DefaultDir="DESKTO~1|DesktopFolder" IsPseudoRoot="1"/>
     <ROW Directory="LUTs_Dir" Directory_Parent="obsfilters_Dir" DefaultDir="LUTs"/>
     <ROW Directory="NewFolder_1_Dir" Directory_Parent="data_Dir" DefaultDir="OBS-SC~1|obs-scripting"/>
     <ROW Directory="NewFolder_Dir" Directory_Parent="APPDIR" DefaultDir="OBS-PL~1|obs-plugins"/>
     <ROW Directory="Rachni_Dir" Directory_Parent="themes_Dir" DefaultDir="Rachni"/>
-    <ROW Directory="SHORTCUTDIR" Directory_Parent="TARGETDIR" DefaultDir="SHORTC~1|SHORTCUTDIR" IsPseudoRoot="1"/>
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
     <ROW Directory="__Dir" Directory_Parent="NewFolder_1_Dir" DefaultDir="64bit"/>
     <ROW Directory="authors_Dir" Directory_Parent="obsstudio_Dir" DefaultDir="authors"/>
@@ -108,14 +106,13 @@
     <ROW Component="AUTHORS" ComponentId="{1E429355-5CA0-4658-932A-A1A260D21054}" Directory_="authors_Dir" Attributes="0" KeyPath="AUTHORS" Type="0"/>
     <ROW Component="Acri.qss" ComponentId="{686D8CE9-9923-43B6-8C9B-976466F6B35D}" Directory_="themes_Dir" Attributes="0" KeyPath="Acri.qss" Type="0"/>
     <ROW Component="NewFolder" ComponentId="{BC28A0E2-34F1-448C-BDAE-A4FE151BE1D5}" Directory_="NewFolder_Dir" Attributes="0"/>
+    <ROW Component="OSSIALIVE64.exe" ComponentId="{EFCFD904-2B8F-491E-9C8D-303E012DDCBE}" Directory_="bit_Dir" Attributes="256" KeyPath="OSSIALIVE64.exe"/>
     <ROW Component="ProductInformation" ComponentId="{B15A7C48-2ED3-4D46-BD45-AC234C26EF6A}" Directory_="APPDIR" Attributes="260" KeyPath="Version"/>
     <ROW Component="Qt5Core.dll" ComponentId="{A782B4AC-CAE7-4B8A-8E3A-25640EF76DC7}" Directory_="bit_Dir" Attributes="256" KeyPath="Qt5Core.dll"/>
     <ROW Component="Qt5Gui.dll" ComponentId="{2C7659AE-E496-45A4-8581-0437AD63D3E7}" Directory_="bit_Dir" Attributes="256" KeyPath="Qt5Gui.dll"/>
     <ROW Component="Qt5Svg.dll" ComponentId="{EF02A290-1AAF-4142-A03E-78F0EF53B6E4}" Directory_="bit_Dir" Attributes="256" KeyPath="Qt5Svg.dll"/>
     <ROW Component="Qt5Widgets.dll" ComponentId="{D5144315-0112-496A-8122-39594155E5A0}" Directory_="bit_Dir" Attributes="256" KeyPath="Qt5Widgets.dll"/>
     <ROW Component="Qt5Xml.dll" ComponentId="{08133795-4AC2-4B3E-B544-8E973B310247}" Directory_="bit_Dir" Attributes="256" KeyPath="Qt5Xml.dll"/>
-    <ROW Component="SHORTCUTDIR" ComponentId="{FC2AB1F1-880D-497C-9F09-2D5726676E79}" Directory_="SHORTCUTDIR" Attributes="0"/>
-    <ROW Component="_obspython.pyd" ComponentId="{1302E673-B3DA-42EE-A9F2-CDE28C95407C}" Directory_="__Dir" Attributes="256" KeyPath="_obspython.pyd" Type="0"/>
     <ROW Component="advanced.svg" ComponentId="{89019391-F3A1-4A79-8470-5B5906465A64}" Directory_="settings_Dir" Attributes="0" KeyPath="advanced.svg" Type="0"/>
     <ROW Component="afZA.ini" ComponentId="{708FE97A-E949-4B92-9AD2-526B28BE944F}" Directory_="locale_3_Dir" Attributes="0" KeyPath="afZA.ini" Type="0"/>
     <ROW Component="afZA.ini_1" ComponentId="{FE290825-2E3A-4420-A4FF-B90335F8A648}" Directory_="locale_Dir" Attributes="0" KeyPath="afZA.ini_1" Type="0"/>
@@ -142,6 +139,7 @@
     <ROW Component="avutil56.dll" ComponentId="{7A75463F-C19F-468A-9D6D-4B2D13A176E9}" Directory_="bit_Dir" Attributes="256" KeyPath="avutil56.dll"/>
     <ROW Component="barndoorbotleft.png" ComponentId="{FE1B3189-AC4A-407E-ACBD-790E8104F68A}" Directory_="luma_wipes_Dir" Attributes="0" KeyPath="barndoorbotleft.png" Type="0"/>
     <ROW Component="bgBG.ini" ComponentId="{4BDE7CDB-E4BC-43FB-95B2-A005AB9F51D8}" Directory_="locale_2_Dir" Attributes="0" KeyPath="bgBG.ini_1" Type="0"/>
+    <ROW Component="bit" ComponentId="{2A39B1E0-F105-4A82-97D9-5A8D6A41A9A7}" Directory_="__Dir" Attributes="0"/>
     <ROW Component="black_and_white.png" ComponentId="{4F17CA25-7FA1-4E64-B35D-7D56B128A189}" Directory_="LUTs_Dir" Attributes="0" KeyPath="black_and_white.png" Type="0"/>
     <ROW Component="blend_add_filter.effect" ComponentId="{AE4F5E52-EECB-4C4E-A890-D1F0ED9CB4D9}" Directory_="obsfilters_Dir" Attributes="0" KeyPath="blend_add_filter.effect" Type="0"/>
     <ROW Component="bnBD.ini" ComponentId="{053621DA-DFCC-4EBF-B93C-2B477136A231}" Directory_="locale_11_Dir" Attributes="0" KeyPath="bnBD.ini_10" Type="0"/>
@@ -181,16 +179,13 @@
     <ROW Component="locale.ini" ComponentId="{6AE054FF-8150-4583-8C23-63F64D1F8705}" Directory_="obsstudio_Dir" Attributes="0" KeyPath="locale.ini" Type="0"/>
     <ROW Component="lua51.dll" ComponentId="{AEACD755-AE0D-4E21-85E1-019B7DDCDBD9}" Directory_="bit_Dir" Attributes="256" KeyPath="lua51.dll"/>
     <ROW Component="obs.dll" ComponentId="{E7EC3957-CFF6-41FA-9535-515D2C2D173F}" Directory_="bit_Dir" Attributes="256" KeyPath="obs.dll"/>
-    <ROW Component="obs64.exe" ComponentId="{4504948E-7F83-460D-881D-C26560365F70}" Directory_="bit_Dir" Attributes="0" KeyPath="obs64.exe"/>
     <ROW Component="obsffmpeg.dll" ComponentId="{8A6E7301-DB3A-47DA-9741-03A1F2D8B870}" Directory_="bit_2_Dir" Attributes="256" KeyPath="obsffmpeg.dll"/>
     <ROW Component="obsffmpegmux.exe" ComponentId="{AEBC32F4-9BC2-4C1C-B855-F6051FE59913}" Directory_="bit_Dir" Attributes="256" KeyPath="obsffmpegmux.exe"/>
     <ROW Component="obsfilters.dll" ComponentId="{94D38950-20F9-4DA1-9029-11883A87207C}" Directory_="bit_2_Dir" Attributes="256" KeyPath="obsfilters.dll"/>
     <ROW Component="obsfrontendapi.dll" ComponentId="{5B997A6C-C09C-4683-B531-574971B1A54A}" Directory_="bit_Dir" Attributes="256" KeyPath="obsfrontendapi.dll"/>
     <ROW Component="obsglad.dll" ComponentId="{70A163E5-8CE6-4B0E-B423-70414B25D828}" Directory_="bit_Dir" Attributes="256" KeyPath="obsglad.dll"/>
-    <ROW Component="obslua.dll" ComponentId="{8254DAFB-A286-4D78-97D5-716A565B98AA}" Directory_="__Dir" Attributes="256" KeyPath="obslua.dll"/>
     <ROW Component="obsoutputs.dll" ComponentId="{4AF0BA8D-3916-422C-87AE-C4325088AB10}" Directory_="bit_2_Dir" Attributes="256" KeyPath="obsoutputs.dll"/>
     <ROW Component="obsqsv11.dll" ComponentId="{3C162600-6C76-47DE-8536-6B406B03848D}" Directory_="bit_2_Dir" Attributes="256" KeyPath="obsqsv11.dll"/>
-    <ROW Component="obsscripting.dll" ComponentId="{0841066E-424B-4D9E-A491-FF199EB7C840}" Directory_="bit_Dir" Attributes="256" KeyPath="obsscripting.dll"/>
     <ROW Component="obstext.dll" ComponentId="{021A8CFE-EF33-4451-8D04-37FFCADB900A}" Directory_="bit_2_Dir" Attributes="256" KeyPath="obstext.dll"/>
     <ROW Component="obstransitions.dll" ComponentId="{AF364A54-5AB7-415F-8B77-630D7E6816F7}" Directory_="bit_2_Dir" Attributes="256" KeyPath="obstransitions.dll"/>
     <ROW Component="obsvst.dll" ComponentId="{FCE09B80-FA96-4F62-A547-B0A6079BBB09}" Directory_="bit_2_Dir" Attributes="256" KeyPath="obsvst.dll"/>
@@ -220,7 +215,6 @@
     <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
-    <ROW File="obs64.exe" Component_="obs64.exe" FileName="obs64.exe" Attributes="0" SourcePath="build64\rundir\Release\bin\64bit\obs64.exe" SelfReg="false"/>
     <ROW File="avcodec58.dll" Component_="avcodec58.dll" FileName="AVCODE~1.DLL|avcodec-58.dll" Attributes="0" SourcePath="build64\rundir\Release\bin\64bit\avcodec-58.dll" SelfReg="false"/>
     <ROW File="avdevice58.dll" Component_="avdevice58.dll" FileName="AVDEVI~1.DLL|avdevice-58.dll" Attributes="0" SourcePath="build64\rundir\Release\bin\64bit\avdevice-58.dll" SelfReg="false"/>
     <ROW File="avfilter7.dll" Component_="avfilter7.dll" FileName="AVFILT~1.DLL|avfilter-7.dll" Attributes="0" SourcePath="build64\rundir\Release\bin\64bit\avfilter-7.dll" SelfReg="false"/>
@@ -246,7 +240,6 @@
     <ROW File="obsffmpegmux.exe" Component_="obsffmpegmux.exe" FileName="OBS-FF~1.EXE|obs-ffmpeg-mux.exe" Attributes="0" SourcePath="build64\rundir\Release\bin\64bit\obs-ffmpeg-mux.exe" SelfReg="false" DigSign="true"/>
     <ROW File="obsfrontendapi.dll" Component_="obsfrontendapi.dll" FileName="OBS-FR~1.DLL|obs-frontend-api.dll" Attributes="0" SourcePath="build64\rundir\Release\bin\64bit\obs-frontend-api.dll" SelfReg="false"/>
     <ROW File="obsglad.dll" Component_="obsglad.dll" FileName="obsglad.dll" Attributes="0" SourcePath="build64\rundir\Release\bin\64bit\obsglad.dll" SelfReg="false"/>
-    <ROW File="obsscripting.dll" Component_="obsscripting.dll" FileName="OBS-SC~1.DLL|obs-scripting.dll" Attributes="0" SourcePath="build64\rundir\Release\bin\64bit\obs-scripting.dll" SelfReg="false"/>
     <ROW File="Qt5Core.dll" Component_="Qt5Core.dll" FileName="Qt5Core.dll" Attributes="0" SourcePath="build64\rundir\Release\bin\64bit\Qt5Core.dll" SelfReg="false"/>
     <ROW File="Qt5Gui.dll" Component_="Qt5Gui.dll" FileName="Qt5Gui.dll" Attributes="0" SourcePath="build64\rundir\Release\bin\64bit\Qt5Gui.dll" SelfReg="false"/>
     <ROW File="Qt5Svg.dll" Component_="Qt5Svg.dll" FileName="Qt5Svg.dll" Attributes="0" SourcePath="build64\rundir\Release\bin\64bit\Qt5Svg.dll" SelfReg="false"/>
@@ -1162,9 +1155,6 @@
     <ROW File="viVN.ini_17" Component_="arSA.ini_14" FileName="vi-VN.ini" Attributes="0" SourcePath="build64\rundir\Release\data\obs-plugins\win-wasapi\locale\vi-VN.ini" SelfReg="false"/>
     <ROW File="zhCN.ini_17" Component_="arSA.ini_14" FileName="zh-CN.ini" Attributes="0" SourcePath="build64\rundir\Release\data\obs-plugins\win-wasapi\locale\zh-CN.ini" SelfReg="false"/>
     <ROW File="zhTW.ini_17" Component_="arSA.ini_14" FileName="zh-TW.ini" Attributes="0" SourcePath="build64\rundir\Release\data\obs-plugins\win-wasapi\locale\zh-TW.ini" SelfReg="false"/>
-    <ROW File="_obspython.pyd" Component_="_obspython.pyd" FileName="_OBSPY~1.PYD|_obspython.pyd" Attributes="0" SourcePath="build64\rundir\Release\data\obs-scripting\64bit\_obspython.pyd" SelfReg="false"/>
-    <ROW File="obslua.dll" Component_="obslua.dll" FileName="obslua.dll" Attributes="0" SourcePath="build64\rundir\Release\data\obs-scripting\64bit\obslua.dll" SelfReg="false"/>
-    <ROW File="obspython.py" Component_="_obspython.pyd" FileName="OBSPYT~1.PY|obspython.py" Attributes="0" SourcePath="build64\rundir\Release\data\obs-scripting\64bit\obspython.py" SelfReg="false"/>
     <ROW File="AUTHORS" Component_="AUTHORS" FileName="AUTHORS" Attributes="0" SourcePath="build64\rundir\Release\data\obs-studio\authors\AUTHORS" SelfReg="false"/>
     <ROW File="overflow.png" Component_="overflow.png" FileName="overflow.png" Attributes="0" SourcePath="build64\rundir\Release\data\obs-studio\images\overflow.png" SelfReg="false"/>
     <ROW File="gplv2.txt" Component_="gplv2.txt" FileName="gplv2.txt" Attributes="0" SourcePath="build64\rundir\Release\data\obs-studio\license\gplv2.txt" SelfReg="false"/>
@@ -1321,6 +1311,7 @@
     <ROW File="windshow.dll" Component_="windshow.dll" FileName="WIN-DS~1.DLL|win-dshow.dll" Attributes="0" SourcePath="build64\rundir\Release\obs-plugins\64bit\win-dshow.dll" SelfReg="false"/>
     <ROW File="winmf.dll" Component_="winmf.dll" FileName="win-mf.dll" Attributes="0" SourcePath="build64\rundir\Release\obs-plugins\64bit\win-mf.dll" SelfReg="false"/>
     <ROW File="winwasapi.dll" Component_="winwasapi.dll" FileName="WIN-WA~1.DLL|win-wasapi.dll" Attributes="0" SourcePath="build64\rundir\Release\obs-plugins\64bit\win-wasapi.dll" SelfReg="false"/>
+    <ROW File="OSSIALIVE64.exe" Component_="OSSIALIVE64.exe" FileName="OSSIAL~1.EXE|OSSIALIVE64.exe" Attributes="0" SourcePath="build64\rundir\Release\bin\64bit\OSSIALIVE64.exe" SelfReg="false" DigSign="true"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BootstrOptComponent">
     <ROW BootstrOptKey="GlobalOptions" DownloadFolder="[AppDataFolder][|Manufacturer]\[|ProductName]\prerequisites" Options="2"/>
@@ -1376,15 +1367,15 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCreateFolderComponent">
     <ROW Directory_="APPDIR" Component_="APPDIR" ManualDelete="true"/>
-    <ROW Directory_="SHORTCUTDIR" Component_="SHORTCUTDIR" ManualDelete="false"/>
     <ROW Directory_="NewFolder_Dir" Component_="NewFolder" ManualDelete="false"/>
+    <ROW Directory_="__Dir" Component_="bit" ManualDelete="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
     <ROW Action="AI_DOWNGRADE" Type="19" Target="4010"/>
     <ROW Action="AI_DpiContentScale" Type="1" Source="aicustact.dll" Target="DpiContentScale"/>
     <ROW Action="AI_EnableDebugLog" Type="321" Source="aicustact.dll" Target="EnableDebugLog"/>
     <ROW Action="AI_InstallModeCheck" Type="1" Source="aicustact.dll" Target="UpdateInstallMode" WithoutSeq="true"/>
-    <ROW Action="AI_LaunchApp" Type="1" Source="aicustact.dll" Target="[#obs64.exe]"/>
+    <ROW Action="AI_LaunchApp" Type="1" Source="aicustact.dll" Target="[#OSSIALIVE64.exe]"/>
     <ROW Action="AI_PREPARE_UPGRADE" Type="65" Source="aicustact.dll" Target="PrepareUpgrade"/>
     <ROW Action="AI_RESTORE_LOCATION" Type="65" Source="aicustact.dll" Target="RestoreLocation"/>
     <ROW Action="AI_ResolveKnownFolders" Type="1" Source="aicustact.dll" Target="AI_ResolveKnownFolders"/>
@@ -1415,7 +1406,6 @@
     <ROW Feature_="MainFeature" Component_="libvorbis0.dll"/>
     <ROW Feature_="MainFeature" Component_="libvorbisenc2.dll"/>
     <ROW Feature_="MainFeature" Component_="libvorbisfile3.dll"/>
-    <ROW Feature_="MainFeature" Component_="obs64.exe"/>
     <ROW Feature_="MainFeature" Component_="libvpx1.dll"/>
     <ROW Feature_="MainFeature" Component_="libx264157.dll"/>
     <ROW Feature_="MainFeature" Component_="lua51.dll"/>
@@ -1423,14 +1413,12 @@
     <ROW Feature_="MainFeature" Component_="obsffmpegmux.exe"/>
     <ROW Feature_="MainFeature" Component_="obsfrontendapi.dll"/>
     <ROW Feature_="MainFeature" Component_="obsglad.dll"/>
-    <ROW Feature_="MainFeature" Component_="obsscripting.dll"/>
     <ROW Feature_="MainFeature" Component_="Qt5Core.dll"/>
     <ROW Feature_="MainFeature" Component_="Qt5Gui.dll"/>
     <ROW Feature_="MainFeature" Component_="Qt5Svg.dll"/>
     <ROW Feature_="MainFeature" Component_="Qt5Widgets.dll"/>
     <ROW Feature_="MainFeature" Component_="Qt5Xml.dll"/>
     <ROW Feature_="MainFeature" Component_="swresample3.dll"/>
-    <ROW Feature_="MainFeature" Component_="SHORTCUTDIR"/>
     <ROW Feature_="MainFeature" Component_="swscale5.dll"/>
     <ROW Feature_="MainFeature" Component_="w32pthreads.dll"/>
     <ROW Feature_="MainFeature" Component_="zlib.dll"/>
@@ -1472,8 +1460,6 @@
     <ROW Feature_="MainFeature" Component_="arSA.ini_12"/>
     <ROW Feature_="MainFeature" Component_="arSA.ini_13"/>
     <ROW Feature_="MainFeature" Component_="arSA.ini_14"/>
-    <ROW Feature_="MainFeature" Component_="_obspython.pyd"/>
-    <ROW Feature_="MainFeature" Component_="obslua.dll"/>
     <ROW Feature_="MainFeature" Component_="AUTHORS"/>
     <ROW Feature_="MainFeature" Component_="overflow.png"/>
     <ROW Feature_="MainFeature" Component_="gplv2.txt"/>
@@ -1505,6 +1491,8 @@
     <ROW Feature_="MainFeature" Component_="windshow.dll"/>
     <ROW Feature_="MainFeature" Component_="winmf.dll"/>
     <ROW Feature_="MainFeature" Component_="winwasapi.dll"/>
+    <ROW Feature_="MainFeature" Component_="OSSIALIVE64.exe"/>
+    <ROW Feature_="MainFeature" Component_="bit"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstExSeqComponent">
     <ROW Action="AI_DOWNGRADE" Condition="AI_NEWERPRODUCTFOUND AND (UILevel &lt;&gt; 5)" Sequence="210"/>
@@ -1533,10 +1521,6 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiRegsComponent">
     <ROW Registry="Path" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Path" Value="[APPDIR]" Component_="ProductInformation"/>
     <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
-  </COMPONENT>
-  <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
-    <ROW Shortcut="obs64.exe" Directory_="SHORTCUTDIR" Name="obs64.exe" Component_="obs64.exe" Target="[#obs64.exe]" Description="obs64.exe" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="bit_Dir"/>
-    <ROW Shortcut="obs64.exe_1" Directory_="DesktopFolder" Name="obs64.exe" Component_="obs64.exe" Target="[#obs64.exe]" Description="obs64.exe" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="bit_Dir"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
     <ATTRIBUTE name="UsedTheme" value="classic"/>
