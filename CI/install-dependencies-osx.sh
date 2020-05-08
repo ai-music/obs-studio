@@ -56,8 +56,8 @@ wget --quiet --retry-connrefused --waitretry=1 -O sparkle.tar.bz2 https://github
 mkdir -p ./sparkle
 tar -xf ./sparkle.tar.bz2 -C ./sparkle
 sudo rm -rf /Library/Frameworks/Sparkle.framework
-sudo chmod -R 777 /Library/Frameworks/Sparkle.framework
 sudo cp -R ./sparkle/Sparkle.framework /Library/Frameworks/Sparkle.framework
+sudo chmod -R 777 /Library/Frameworks/Sparkle.framework
 
 # CEF Stuff
 hr "Downloading CEF"
