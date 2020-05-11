@@ -5,7 +5,7 @@
 class AiMusicProfileWrangler { 
 public:
 	QString replaceAiMusicStream(const QString &sceneFolder,
-				  QString &sceneFilePath,
+				  const QString &sceneFileName,
 				  const QString &streamUri);
 
 	QString makeOssiaSceneFile(const QString &sceneFolder,
