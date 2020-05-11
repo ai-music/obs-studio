@@ -1,5 +1,6 @@
 #include <QMessageBox>
 #include <QPainter>
+#include <QDir>
 #include "window-basic-main.hpp"
 
 #ifdef _WIN32
@@ -264,41 +265,37 @@ void OBSBasic::onFailed_Step5_deleteRoom(QString data)
 
 void OBSBasic::OnGotRoom(QString roomId, QString musicStyle, QString streamUri)
 {
-
-	// --
-	const char *sceneCollection = config_get_string(
+	QString sceneFileName = config_get_string(
 		App()->GlobalConfig(), "Basic", "SceneCollectionFile");
-	char savePath[512];
-	char fileName[512];
-	int ret;
 
-	if (!sceneCollection)
-		throw "Failed to get scene collection name";
-
-	ret = snprintf(fileName, 512, "obs-studio/basic/scenes/%s.json",
-		       sceneCollection);
-	if (ret <= 0)
-		throw "Failed to create scene collection file name";
-
-	ret = GetConfigPath(savePath, sizeof(savePath), fileName);
-	if (ret <= 0)
-		throw "Failed to get scene collection json file path";
-
-	QString sceneFilePath(savePath);
+	sceneFileName += +".json";
 
 	// Try and replace the reference to the Ai-Music stream in the current file. If
 	// we can't find a reference to an Ai-Music stream, then load the default file.
 	char szSceneFolder[512];
-	if (GetConfigPath(szSceneFolder, sizeof(szSceneFolder),
-			  "obs-studio/basic/scenes") < 0) {
+	GetConfigPath(szSceneFolder, sizeof(szSceneFolder),
+			  "obs-studio/basic/scenes");
+
+	const QString sceneFolder(szSceneFolder);
+	if (sceneFolder.isEmpty()) {
 		return;
 	}
-	const QString sceneFolder(szSceneFolder);
 
-	sceneFilePath = aiMusicProfileWrangler.replaceAiMusicStream(
-		sceneFolder,sceneFilePath, streamUri);
+	QString sceneFilePath;
+	if (!sceneFileName.isEmpty()) {
+		// Save any changes the user may have recently made
+		const QString orgingalSceneFilePath =
+			QDir::fromNativeSeparators( sceneFolder + QDir::separator() +
+			sceneFileName );
+		Save(orgingalSceneFilePath.toStdString().data());
 
-	if (sceneFilePath.isEmpty() || true ) {
+		// Modify the scene file, replacing the current Ai-Music URI with
+		// the new onw.
+		sceneFilePath = aiMusicProfileWrangler.replaceAiMusicStream(
+			sceneFolder, sceneFileName, streamUri);
+	}
+
+	if (sceneFilePath.isEmpty() ) {
 		// Load in a correctly configured scene for the stream.
 
 		sceneFilePath = aiMusicProfileWrangler.makeOssiaSceneFile(
@@ -307,6 +304,7 @@ void OBSBasic::OnGotRoom(QString roomId, QString musicStyle, QString streamUri)
 
 	if (!sceneFilePath.isEmpty()) {
 		Load(sceneFilePath.toStdString().data());
+		RefreshSceneCollections();
 	}
 	setUiConnected();
 	setUiForMusicStyle(musicStyle);

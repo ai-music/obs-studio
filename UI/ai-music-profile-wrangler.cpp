@@ -5,17 +5,20 @@
 #include <qjsonobject.h>
 #include <qjsonarray.h>
 #include <qjsonvalue>
+#include <qdir>
 
 static const char *szInputKey = "input";
 static const char *szIsLocalFileKey = "is_local_file";
 
 QString AiMusicProfileWrangler::replaceAiMusicStream(const QString &sceneFolder,
-						  QString &sceneFilePath,
+						  const QString &sceneFileName,
 						  const QString &streamUri)
 {
 	// In the source name "Ossia Music", change the settings
-	QFile currentScene(sceneFilePath);
-	auto opened = currentScene.open( QFile::ReadWrite);
+	const QString curerntSceneFilePath = QDir::fromNativeSeparators(
+		sceneFolder + QDir::separator() + sceneFileName);
+	QFile currentScene(curerntSceneFilePath);
+	auto opened = currentScene.open( QFile::ReadOnly);
 	if (!opened) {
 		return "";
 	}
@@ -28,11 +31,11 @@ QString AiMusicProfileWrangler::replaceAiMusicStream(const QString &sceneFolder,
 		return "";
 	}
 
-	const auto quoteAfter = fileContents.indexOf('"', aiMusicIndex);
 	const auto quoteBefore = fileContents.lastIndexOf('"', aiMusicIndex);
+	const auto quoteAfter = fileContents.indexOf('"', aiMusicIndex);
 	QString sceneForThisUri =
-		fileContents.left(quoteBefore) + streamUri +
-		fileContents.right(fileContents.length() - quoteBefore);
+		fileContents.left(quoteBefore+1) + streamUri +
+				  fileContents.right(fileContents.length() - quoteAfter);
 
 	if (!currentScene.open(QIODevice::ReadWrite)) {
 		return "";
@@ -44,7 +47,9 @@ QString AiMusicProfileWrangler::replaceAiMusicStream(const QString &sceneFolder,
 
 	const QString thisFilename = makeNewSceneFileName(streamUri);
 
-	const QString saveToPath = sceneFolder + '/' + thisFilename;
+	const QString saveToPath = QDir::fromNativeSeparators(
+		sceneFolder + QDir::separator() + thisFilename);
+
 	QFile updateFile(saveToPath);
 	if (updateFile.open(QIODevice::WriteOnly)) {
 		QTextStream stream(&updateFile);
@@ -77,7 +82,8 @@ QString AiMusicProfileWrangler::makeOssiaSceneFile(const QString &sceneFolder,
 	//}
 	const QString thisFilename = makeNewSceneFileName(streamUri);
 
-	const QString saveToPath = sceneFolder + '/' + thisFilename;
+	const QString saveToPath = QDir::fromNativeSeparators(
+		sceneFolder + QDir::separator() + thisFilename);
 	QFile updateFile(saveToPath);
 	if (updateFile.open(QIODevice::WriteOnly)) {
 		QTextStream stream(&updateFile);
