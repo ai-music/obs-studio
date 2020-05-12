@@ -168,19 +168,39 @@ void OBSBasic::DoDisconnectFromAiMusic()
 	aiMusicRoom.doDisconnect();
 }
 
-void OBSBasic::changeSourceName(const QString& /*name*/) {
-	//OBSScene scene =
-	//	GetCurrentScene(); // Unfortunately, there doesn't seem to be an
-	//auto sceneItem =
-	//	obs_scene_find_source(scene, name); // obs_source_set_input
-	//auto source = obs_sceneitem_get_source(sceneItem);
-	//if (sceneItem) {
-	//	obs_source_set_name(source, name2);
-	//} else {
-	//	sceneItem = obs_scene_find_source(scene, name2);
-	//	source = obs_sceneitem_get_source(sceneItem);
-	//	obs_source_set_name(source, name1);
-	//}
+bool OBSBasic::changeSourceUri(const QString &streamUri)
+{
+	// See documentation at
+	// https://obsproject.com/docs/reference-sources.html#c.obs_source_t
+	// https://obsproject.com/docs/reference-settings.html#c.obs_data_t
+	OBSScene scene =
+		GetCurrentScene(); // Unfortunately, there doesn't seem to be an
+	obs_sceneitem_t* sceneItem =
+		obs_scene_find_source(scene, "Ossia Music" ); // obs_source_set_input
+	obs_source_t *source = obs_sceneitem_get_source(sceneItem);
+	obs_data_t *data = obs_source_get_settings(source);
+	const char *json = obs_data_get_json(data);
+	if (json == nullptr) {
+		return false;
+	}
+
+	const QString strJson(json);
+
+	const auto aiMusicIndex = strJson.indexOf("aimusic.services");
+	if (aiMusicIndex <= 0) {
+		return false;
+	}
+
+	const auto quoteBefore = strJson.lastIndexOf('"', aiMusicIndex);
+	const auto quoteAfter = strJson.indexOf('"', aiMusicIndex);
+	const QString newJson =
+		strJson.left(quoteBefore + 1) + streamUri +
+			  strJson.right(strJson.length() - quoteAfter);
+
+	obs_data_t *newData =
+		obs_data_create_from_json( newJson.toStdString().data() );
+	obs_source_update(source, newData);
+	return true;
 }
 
 void OBSBasic::DoMusicStyle(const QString &nusicStyle) {
@@ -265,47 +285,31 @@ void OBSBasic::onFailed_Step5_deleteRoom(QString data)
 
 void OBSBasic::OnGotRoom(QString roomId, QString musicStyle, QString streamUri)
 {
-	QString sceneFileName = config_get_string(
-		App()->GlobalConfig(), "Basic", "SceneCollectionFile");
+	auto changedSourceUri = changeSourceUri(streamUri);
+	if (!changedSourceUri) {
+		// If we weren't able to modify the Ai Music stream in the 
+		// scene, then we prepare and load a default scene.
+		char szSceneFolder[512];
+		GetConfigPath(szSceneFolder, sizeof(szSceneFolder),
+			      "obs-studio/basic/scenes");
 
-	sceneFileName += +".json";
+		const QString sceneFolder(szSceneFolder);
+		if (sceneFolder.isEmpty()) {
+			return;
+		}
 
-	// Try and replace the reference to the Ai-Music stream in the current file. If
-	// we can't find a reference to an Ai-Music stream, then load the default file.
-	char szSceneFolder[512];
-	GetConfigPath(szSceneFolder, sizeof(szSceneFolder),
-			  "obs-studio/basic/scenes");
+		const QString sceneFilePath =
+				aiMusicProfileWrangler.makeOssiaSceneFile(
+					sceneFolder, streamUri);
 
-	const QString sceneFolder(szSceneFolder);
-	if (sceneFolder.isEmpty()) {
-		return;
-	}
+		if (sceneFilePath.isEmpty()) {
+			return;
+		}
 
-	QString sceneFilePath;
-	if (!sceneFileName.isEmpty()) {
-		// Save any changes the user may have recently made
-		const QString orgingalSceneFilePath =
-			QDir::fromNativeSeparators( sceneFolder + QDir::separator() +
-			sceneFileName );
-		Save(orgingalSceneFilePath.toStdString().data());
-
-		// Modify the scene file, replacing the current Ai-Music URI with
-		// the new onw.
-		sceneFilePath = aiMusicProfileWrangler.replaceAiMusicStream(
-			sceneFolder, sceneFileName, streamUri);
-	}
-
-	if (sceneFilePath.isEmpty() ) {
-		// Load in a correctly configured scene for the stream.
-
-		sceneFilePath = aiMusicProfileWrangler.makeOssiaSceneFile(
-			sceneFolder, streamUri);
-	}
-
-	if (!sceneFilePath.isEmpty()) {
 		Load(sceneFilePath.toStdString().data());
 		RefreshSceneCollections();
 	}
+
 	setUiConnected();
 	setUiForMusicStyle(musicStyle);
 	//QString message("You are now connected to AiMusic playing " + musicStyle + ".");
