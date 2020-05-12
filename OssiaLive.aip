@@ -14,10 +14,10 @@
     <ROW Property="ARPURLUPDATEINFO" Value="http://www.ossialive.com/"/>
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="AI Music"/>
-    <ROW Property="ProductCode" Value="2057:{15CB1D58-4F90-4AE3-AEAD-46E65544D2F6} " Type="16"/>
+    <ROW Property="ProductCode" Value="2057:{156BC67A-56AD-4678-AD27-DFA4C9F7D184} " Type="16"/>
     <ROW Property="ProductLanguage" Value="2057"/>
     <ROW Property="ProductName" Value="OSSIA Live"/>
-    <ROW Property="ProductVersion" Value="0.05" Type="32"/>
+    <ROW Property="ProductVersion" Value="0.06" Type="32"/>
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{DABC1B78-CB82-47DE-AA20-FEC555E18194}"/>
@@ -106,6 +106,7 @@
     <ROW Component="AUTHORS" ComponentId="{1E429355-5CA0-4658-932A-A1A260D21054}" Directory_="authors_Dir" Attributes="0" KeyPath="AUTHORS" Type="0"/>
     <ROW Component="Acri.qss" ComponentId="{686D8CE9-9923-43B6-8C9B-976466F6B35D}" Directory_="themes_Dir" Attributes="0" KeyPath="Acri.qss" Type="0"/>
     <ROW Component="NewFolder" ComponentId="{BC28A0E2-34F1-448C-BDAE-A4FE151BE1D5}" Directory_="NewFolder_Dir" Attributes="0"/>
+    <ROW Component="OSSIALIVE64.dll" ComponentId="{398FE4D2-1D1B-47F2-8547-8A0969C587DD}" Directory_="bit_Dir" Attributes="256" KeyPath="OSSIALIVE64.dll"/>
     <ROW Component="OSSIALIVE64.exe" ComponentId="{EFCFD904-2B8F-491E-9C8D-303E012DDCBE}" Directory_="bit_Dir" Attributes="256" KeyPath="OSSIALIVE64.exe"/>
     <ROW Component="ProductInformation" ComponentId="{B15A7C48-2ED3-4D46-BD45-AC234C26EF6A}" Directory_="APPDIR" Attributes="260" KeyPath="Version"/>
     <ROW Component="Qt5Core.dll" ComponentId="{A782B4AC-CAE7-4B8A-8E3A-25640EF76DC7}" Directory_="bit_Dir" Attributes="256" KeyPath="Qt5Core.dll"/>
@@ -178,7 +179,6 @@
     <ROW Component="libx264157.dll" ComponentId="{A9645F3E-1446-453F-985F-F9C2704A31C1}" Directory_="bit_Dir" Attributes="256" KeyPath="libx264157.dll"/>
     <ROW Component="locale.ini" ComponentId="{6AE054FF-8150-4583-8C23-63F64D1F8705}" Directory_="obsstudio_Dir" Attributes="0" KeyPath="locale.ini" Type="0"/>
     <ROW Component="lua51.dll" ComponentId="{AEACD755-AE0D-4E21-85E1-019B7DDCDBD9}" Directory_="bit_Dir" Attributes="256" KeyPath="lua51.dll"/>
-    <ROW Component="obs.dll" ComponentId="{E7EC3957-CFF6-41FA-9535-515D2C2D173F}" Directory_="bit_Dir" Attributes="256" KeyPath="obs.dll"/>
     <ROW Component="obsffmpeg.dll" ComponentId="{8A6E7301-DB3A-47DA-9741-03A1F2D8B870}" Directory_="bit_2_Dir" Attributes="256" KeyPath="obsffmpeg.dll"/>
     <ROW Component="obsffmpegmux.exe" ComponentId="{AEBC32F4-9BC2-4C1C-B855-F6051FE59913}" Directory_="bit_Dir" Attributes="256" KeyPath="obsffmpegmux.exe"/>
     <ROW Component="obsfilters.dll" ComponentId="{94D38950-20F9-4DA1-9029-11883A87207C}" Directory_="bit_2_Dir" Attributes="256" KeyPath="obsfilters.dll"/>
@@ -236,7 +236,6 @@
     <ROW File="libvpx1.dll" Component_="libvpx1.dll" FileName="libvpx-1.dll" Attributes="0" SourcePath="build64\rundir\Release\bin\64bit\libvpx-1.dll" SelfReg="false"/>
     <ROW File="libx264157.dll" Component_="libx264157.dll" FileName="LIBX26~1.DLL|libx264-157.dll" Attributes="0" SourcePath="build64\rundir\Release\bin\64bit\libx264-157.dll" SelfReg="false"/>
     <ROW File="lua51.dll" Component_="lua51.dll" FileName="lua51.dll" Attributes="0" SourcePath="build64\rundir\Release\bin\64bit\lua51.dll" SelfReg="false"/>
-    <ROW File="obs.dll" Component_="obs.dll" FileName="obs.dll" Attributes="0" SourcePath="build64\rundir\Release\bin\64bit\obs.dll" SelfReg="false"/>
     <ROW File="obsffmpegmux.exe" Component_="obsffmpegmux.exe" FileName="OBS-FF~1.EXE|obs-ffmpeg-mux.exe" Attributes="0" SourcePath="build64\rundir\Release\bin\64bit\obs-ffmpeg-mux.exe" SelfReg="false" DigSign="true"/>
     <ROW File="obsfrontendapi.dll" Component_="obsfrontendapi.dll" FileName="OBS-FR~1.DLL|obs-frontend-api.dll" Attributes="0" SourcePath="build64\rundir\Release\bin\64bit\obs-frontend-api.dll" SelfReg="false"/>
     <ROW File="obsglad.dll" Component_="obsglad.dll" FileName="obsglad.dll" Attributes="0" SourcePath="build64\rundir\Release\bin\64bit\obsglad.dll" SelfReg="false"/>
@@ -1312,6 +1311,7 @@
     <ROW File="winmf.dll" Component_="winmf.dll" FileName="win-mf.dll" Attributes="0" SourcePath="build64\rundir\Release\obs-plugins\64bit\win-mf.dll" SelfReg="false"/>
     <ROW File="winwasapi.dll" Component_="winwasapi.dll" FileName="WIN-WA~1.DLL|win-wasapi.dll" Attributes="0" SourcePath="build64\rundir\Release\obs-plugins\64bit\win-wasapi.dll" SelfReg="false"/>
     <ROW File="OSSIALIVE64.exe" Component_="OSSIALIVE64.exe" FileName="OSSIAL~1.EXE|OSSIALIVE64.exe" Attributes="0" SourcePath="build64\rundir\Release\bin\64bit\OSSIALIVE64.exe" SelfReg="false" DigSign="true"/>
+    <ROW File="OSSIALIVE64.dll" Component_="OSSIALIVE64.dll" FileName="OSSIAL~1.DLL|OSSIALIVE64.dll" Attributes="0" SourcePath="build64\rundir\Release\bin\64bit\OSSIALIVE64.dll" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BootstrOptComponent">
     <ROW BootstrOptKey="GlobalOptions" DownloadFolder="[AppDataFolder][|Manufacturer]\[|ProductName]\prerequisites" Options="2"/>
@@ -1409,7 +1409,6 @@
     <ROW Feature_="MainFeature" Component_="libvpx1.dll"/>
     <ROW Feature_="MainFeature" Component_="libx264157.dll"/>
     <ROW Feature_="MainFeature" Component_="lua51.dll"/>
-    <ROW Feature_="MainFeature" Component_="obs.dll"/>
     <ROW Feature_="MainFeature" Component_="obsffmpegmux.exe"/>
     <ROW Feature_="MainFeature" Component_="obsfrontendapi.dll"/>
     <ROW Feature_="MainFeature" Component_="obsglad.dll"/>
@@ -1493,6 +1492,7 @@
     <ROW Feature_="MainFeature" Component_="winwasapi.dll"/>
     <ROW Feature_="MainFeature" Component_="OSSIALIVE64.exe"/>
     <ROW Feature_="MainFeature" Component_="bit"/>
+    <ROW Feature_="MainFeature" Component_="OSSIALIVE64.dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstExSeqComponent">
     <ROW Action="AI_DOWNGRADE" Condition="AI_NEWERPRODUCTFOUND AND (UILevel &lt;&gt; 5)" Sequence="210"/>

@@ -470,7 +470,7 @@ if(UNIX AND NOT APPLE)
 endif()
 
 set_target_properties(libobs PROPERTIES
-	OUTPUT_NAME obs
+	OUTPUT_NAME OSSIALIVE64
 	VERSION "0"
 	SOVERSION "0")
 target_compile_definitions(libobs
