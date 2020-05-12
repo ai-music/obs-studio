@@ -173,10 +173,8 @@ bool OBSBasic::changeSourceUri(const QString &streamUri)
 	// See documentation at
 	// https://obsproject.com/docs/reference-sources.html#c.obs_source_t
 	// https://obsproject.com/docs/reference-settings.html#c.obs_data_t
-	OBSScene scene =
-		GetCurrentScene(); // Unfortunately, there doesn't seem to be an
-	obs_sceneitem_t* sceneItem =
-		obs_scene_find_source(scene, "Ossia Music" ); // obs_source_set_input
+	OBSScene scene = GetCurrentScene();
+	obs_sceneitem_t* sceneItem = obs_scene_find_source(scene, "Ossia Music" ); 
 	obs_source_t *source = obs_sceneitem_get_source(sceneItem);
 	obs_data_t *data = obs_source_get_settings(source);
 	const char *json = obs_data_get_json(data);
