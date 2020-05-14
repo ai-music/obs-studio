@@ -300,29 +300,28 @@ OBSBasic::OBSBasic(QWidget *parent)
 	connect(diskFullTimer, SIGNAL(timeout()), this,
 		SLOT(CheckDiskSpaceRemaining()));
 
-	QAction *renameScene = new QAction(ui->scenesDock);
-	renameScene->setShortcutContext(Qt::WidgetWithChildrenShortcut);
-	connect(renameScene, SIGNAL(triggered()), this, SLOT(EditSceneName()));
-	ui->scenesDock->addAction(renameScene);
+	//QAction *renameScene = new QAction(ui->scenesDock);
+	//renameScene->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+	//connect(renameScene, SIGNAL(triggered()), this, SLOT(EditSceneName()));
+	//ui->scenesDock->addAction(renameScene);
 
-	QAction *renameSource = new QAction(ui->sourcesDock);
-	renameSource->setShortcutContext(Qt::WidgetWithChildrenShortcut);
-	connect(renameSource, SIGNAL(triggered()), this,
-		SLOT(EditSceneItemName()));
-	ui->sourcesDock->addAction(renameSource);
+	//QAction *renameSource = new QAction(ui->sourcesDock);
+	//renameSource->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+	//connect(renameSource, SIGNAL(triggered()), this, SLOT(EditSceneItemName()));
+	//ui->sourcesDock->addAction(renameSource);
 
 #ifdef __APPLE__
-	renameScene->setShortcut({Qt::Key_Return});
-	renameSource->setShortcut({Qt::Key_Return});
+	//renameScene->setShortcut({Qt::Key_Return});
+	//renameSource->setShortcut({Qt::Key_Return});
 
-	ui->actionRemoveSource->setShortcuts({Qt::Key_Backspace});
-	ui->actionRemoveScene->setShortcuts({Qt::Key_Backspace});
+	//ui->actionRemoveSource->setShortcuts({Qt::Key_Backspace});
+	//ui->actionRemoveScene->setShortcuts({Qt::Key_Backspace});
 
 	ui->action_Settings->setMenuRole(QAction::PreferencesRole);
 	ui->actionE_xit->setMenuRole(QAction::QuitRole);
 #else
-	renameScene->setShortcut({Qt::Key_F2});
-	renameSource->setShortcut({Qt::Key_F2});
+	//renameScene->setShortcut({Qt::Key_F2});
+	//renameSource->setShortcut({Qt::Key_F2});
 #endif
 
 	auto addNudge = [this](const QKeySequence &seq, const char *s) {
@@ -338,10 +337,10 @@ OBSBasic::OBSBasic(QWidget *parent)
 	addNudge(Qt::Key_Left, SLOT(NudgeLeft()));
 	addNudge(Qt::Key_Right, SLOT(NudgeRight()));
 
-	assignDockToggle(ui->scenesDock, ui->toggleScenes);
+	//assignDockToggle(ui->scenesDock, ui->toggleScenes);
 	assignDockToggle(ui->sourcesDock, ui->toggleSources);
 	assignDockToggle(ui->mixerDock, ui->toggleMixer);
-	assignDockToggle(ui->transitionsDock, ui->toggleTransitions);
+	//assignDockToggle(ui->transitionsDock, ui->toggleTransitions);
 	assignDockToggle(ui->controlsDock, ui->toggleControls);
 	assignDockToggle(statsDock, ui->toggleStats);
 
@@ -1861,6 +1860,12 @@ void OBSBasic::OBSInit()
 	QMetaObject::invokeMethod(this, "DeferredSysTrayLoad",
 				  Qt::QueuedConnection, Q_ARG(int, 10));
 #endif
+
+	// Hide the "Scene" and the "Transition" docks.
+	ui->scenesDock->setVisible(false /*true*/);
+	ui->scenesDock->hide();
+	ui->transitionsDock->setVisible(false /*true*/);
+	ui->transitionsDock->hide();
 }
 
 void OBSBasic::OnFirstLoad()
@@ -6155,6 +6160,12 @@ void OBSBasic::ToggleAlwaysOnTop()
 	SetAlwaysOnTop(this, !isAlwaysOnTop);
 
 	show();
+
+	// Hide the "Scene" and the "Transition" docks.
+	ui->scenesDock->setVisible(false /*true*/);
+	ui->scenesDock->hide();
+	ui->transitionsDock->setVisible(false /*true*/);
+	ui->transitionsDock->hide();
 }
 
 void OBSBasic::GetFPSCommon(uint32_t &num, uint32_t &den) const
@@ -6934,22 +6945,30 @@ void OBSBasic::on_resetUI_triggered()
 
 	int mixerSize = cx - (cx22_5 * 2 + cx5 * 2);
 
-	QList<QDockWidget *> docks{ui->scenesDock, ui->sourcesDock,
-				   ui->mixerDock, ui->transitionsDock,
+	QList<QDockWidget *> docks{/*ui->scenesDock,*/ ui->sourcesDock,
+				   ui->mixerDock, /*ui->transitionsDock,*/
 				   ui->controlsDock};
 
 	QList<int> sizes{cx22_5, cx22_5, mixerSize, cx5, cx5};
 
-	ui->scenesDock->setVisible(true);
+	ui->scenesDock->setVisible(false /*true*/);
+	ui->scenesDock->hide();
+
 	ui->sourcesDock->setVisible(true);
 	ui->mixerDock->setVisible(true);
-	ui->transitionsDock->setVisible(true);
+
+	ui->transitionsDock->setVisible(false/*true*/);
+	ui->transitionsDock->hide();
+
 	ui->controlsDock->setVisible(true);
 	statsDock->setVisible(false);
 	statsDock->setFloating(true);
 
+
 	resizeDocks(docks, {cy, cy, cy, cy, cy}, Qt::Vertical);
 	resizeDocks(docks, sizes, Qt::Horizontal);
+
+
 #endif
 }
 
