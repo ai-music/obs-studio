@@ -1,6 +1,8 @@
 {
     "title": "OSSIA LIVE",
     "background": "../CI/install/osx/background.tiff",
+    "icon": "../CI/install/osx/OSSIALIVE.icns",
+    "badge_icon": "../CI/install/osx/OSSIALIVE.icns",
     "format": "UDZO",
     "compression-level": 9,
     "window": { "position": { "x": 100, "y": 100 },

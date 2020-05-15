@@ -75,8 +75,8 @@ plutil -insert OBSFeedsURL -string https://obsproject.com/osx_update/feeds.xml .
 plutil -insert SUFeedURL -string https://obsproject.com/osx_update/stable/updates.xml ./OSSIALIVE.app/Contents/Info.plist
 plutil -insert SUPublicDSAKeyFile -string OBSPublicDSAKey.pem ./OSSIALIVE.app/Contents/Info.plist
 
-echo "dmgbuild -s ../CI/install/osx/settings.json "OSSIA" OSSIALIVE.dmg"
-dmgbuild -s ../CI/install/osx/settings.json "OSSIA" OSSIALIVE.dmg
+echo "dmgbuild -s ../CI/install/osx/settings.json 'OSSIALIVE' OSSIALIVE.dmg"
+dmgbuild -s ../CI/install/osx/settings.json "OSSIALIVE" OSSIALIVE.dmg
 
 if [ -v "$TRAVIS" ]; then
 	# Signing stuff

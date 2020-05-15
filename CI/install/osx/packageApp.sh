@@ -11,7 +11,7 @@ mkdir OSSIALIVE.app/Contents/Resources
 
 cp -R rundir/RelWithDebInfo/bin/ ./OSSIALIVE.app/Contents/MacOS
 cp -R rundir/RelWithDebInfo/data ./OSSIALIVE.app/Contents/Resources
-cp ../CI/install/osx/obs.icns ./OSSIALIVE.app/Contents/Resources
+cp ../CI/install/osx/OSSIALIVE.icns ./OSSIALIVE.app/Contents/Resources
 cp -R rundir/RelWithDebInfo/obs-plugins/ ./OSSIALIVE.app/Contents/PlugIns
 cp ../CI/install/osx/Info.plist ./OSSIALIVE.app/Contents
 
