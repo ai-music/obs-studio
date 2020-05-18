@@ -76,8 +76,17 @@ plutil -insert OBSFeedsURL -string https://obsproject.com/osx_update/feeds.xml .
 plutil -insert SUFeedURL -string https://obsproject.com/osx_update/stable/updates.xml ./OSSIALIVE.app/Contents/Info.plist
 plutil -insert SUPublicDSAKeyFile -string OBSPublicDSAKey.pem ./OSSIALIVE.app/Contents/Info.plist
 
-echo "dmgbuild -s ../CI/install/osx/settings.json 'OSSIALIVE' OSSIALIVE.dmg"
+hr "Building DMG File"
 dmgbuild -s ../CI/install/osx/settings.json "OSSIALIVE" OSSIALIVE.dmg
+
+# Set the installer image:
+hr "Setting the DMG file's icon."
+# https://stackoverflow.com/questions/45381740/how-to-programmatically-preferably-bash-add-icon-to-dmg
+sips -i ../CI/install/osx/OSSIALIVE.png
+DeRez -only icns ../CI/install/osx/OSSIALIVE.png > icns.rsrc
+Rez -append icns.rsrc -o OSSIALIVE.dmg
+SetFile -a C OSSIALIVE.dmg
+# End of trying to set the icon on the DMG file.
 
 if [ -v "$TRAVIS" ]; then
 	# Signing stuff
