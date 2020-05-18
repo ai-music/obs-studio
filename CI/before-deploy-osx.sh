@@ -38,6 +38,7 @@ fi
 ../CI/install/osx/packageApp.sh
 
 # fix obs outputs plugin it doesn't play nicely with dylibBundler at the moment
+hr "Fix Output Plugins"
 cp /usr/local/opt/mbedtls/lib/libmbedtls.12.dylib ./OSSIALIVE.app/Contents/Frameworks/
 cp /usr/local/opt/mbedtls/lib/libmbedcrypto.3.dylib ./OSSIALIVE.app/Contents/Frameworks/
 cp /usr/local/opt/mbedtls/lib/libmbedx509.0.dylib ./OSSIALIVE.app/Contents/Frameworks/
